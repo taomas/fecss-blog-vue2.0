@@ -1,0 +1,6 @@
+.DS_Store
+client/node_modules/
+client/dist/
+client/npm-debug.log
+test/unit/coverage
+server/node_modules/

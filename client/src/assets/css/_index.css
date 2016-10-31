@@ -1,0 +1,16 @@
+@import 'base/base';
+@import 'base/layout';
+
+.full-page {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
