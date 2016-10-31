@@ -8,20 +8,29 @@ const json = require('koa-json');
 const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser')();
 const logger = require('koa-logger');
+const cors = require('kcors');
 
-const index = require('./routes/index');
+const articles = require('./routes/articles');
 const users = require('./routes/users');
-const api = require('./routes/api');
+const admin = require('./routes/admin');
 
 // middlewares
 app.use(convert(bodyparser));
 app.use(convert(json()));
 app.use(convert(logger()));
 app.use(require('koa-static')(__dirname + '/public'));
+app.use(cors());
 
 app.use(views(__dirname + '/views', {
   extension: 'jade'
 }));
+
+const db = require('./config/mongoose')();
+db.on('error', console.error.bind(console, 'error: connect error!'))
+db.once('open', function () {
+  // 一次打开记录
+  console.log('connect success!');
+});
 
 // logger
 app.use(async (ctx, next) => {
@@ -31,16 +40,19 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
-router.use('/', index.routes(), index.allowedMethods());
+router.use('/', articles.routes(), articles.allowedMethods());
 router.use('/users', users.routes(), users.allowedMethods());
-router.use('/api', api.routes(), api.allowedMethods());
+router.use('/admin', admin.routes(), admin.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());
 // response
 
 app.on('error', function(err, ctx){
   console.log(err)
-  logger.error('server error', err, ctx);
+  // logger.error('server error', err, ctx);
+  ctx.body = {
+    message: '服务器异常！'
+  }
 });
 
 

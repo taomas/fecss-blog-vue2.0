@@ -1,4 +1,4 @@
-.rd-row {
+.ly-row {
     position: relative;
     margin-left: 0;
     margin-right: 0;
@@ -6,7 +6,8 @@
     zoom: 1;
     display: block;
 }
-.rd-row-flex {
+
+.ly-row-flex {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -16,7 +17,7 @@
   }
 }
 
-.rd-col-flex {
+.ly-col-flex {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -58,14 +59,14 @@
   align-items: flex-end;
 }
 
-.rd-col {
+.ly-col {
   position: relative;
   display: block;
 }
 
 $baseWidth: 4.166667%;
 @for $i from 1 to 24 {
-    .rd-col-$i {
+    .ly-col-$i {
       display: block;
       width: calc($i * $baseWidth);
     }
@@ -73,7 +74,7 @@ $baseWidth: 4.166667%;
 
 @media screen and (max-width: 768px) {
   @for $i from 1 to 24 {
-      .rd-col-sm-$i {
+      .ly-col-sm-$i {
         display: block;
         width: calc($i * $baseWidth);
       }
@@ -82,7 +83,7 @@ $baseWidth: 4.166667%;
 
 @media screen and (max-width: 1170px) {
   @for $i from 1 to 24 {
-      .rd-col-lg-$i {
+      .ly-col-lg-$i {
         display: block;
         width: calc($i * $baseWidth);
       }
