@@ -1,7 +1,7 @@
 <template>
   <div class="home-container ly-row-flex">
     <AsideLeft></AsideLeft>
-    <router-view></router-view>
+    <TagsList></TagsList>
     <AsideRight></AsideRight>
   </div>
 </template>
@@ -9,12 +9,14 @@
 <script>
 import AsideLeft from '../components/AsideLeft'
 import AsideRight from '../components/AsideRight'
+import TagsList from '../components/TagsList'
 
 export default {
   name: 'home',
   components: {
     AsideLeft,
-    AsideRight
+    AsideRight,
+    TagsList
   },
   ready () {
   }

@@ -8,29 +8,27 @@ export const getArticleDetail = ({dispatch}, opts) => {
   })
 }
 
-export const getArticleList = (ctx, opts) => {
+export const getArticleList = ({dispatch}, opts) => {
   api.getArticleList(opts).then(function (res) {
-    if (res.body.success) {
-      ctx.commit(types.GET_ARTICLE_LIST, res.body.articleList)
-    }
+    dispatch(types.GET_ARTICLE_LIST, res.body)
   })
 }
 
-export const getArchiveArticles = (ctx) => {
+export const getArchiveArticles = ({dispatch}) => {
   api.getArchiveArticles().then(function (res) {
-    ctx.commit(types.GET_ARCHIVE_ARTICLES, res.body.articles)
+    dispatch(types.GET_ARCHIVE_ARTICLES, res.body.articles)
   })
 }
 
-export const getTagsList = (ctx) => {
+export const getTagsList = ({dispatch}) => {
   api.getTagsList().then(function (res) {
-    ctx.commit(types.GET_TAGS_LIST, res.body.tagsList)
+    dispatch(types.GET_TAGS_LIST, res.body.tagsList)
   })
 }
 
-export const getTagsContent = (ctx, tags) => {
+export const getTagsContent = ({dispatch}, tags) => {
   api.getTagsContent(tags).then(function (res) {
-    ctx.commit(types.GET_TAGS_CONTENT, res.body.tagsContent)
+    dispatch(types.GET_TAGS_CONTENT, res.body.tagsContent)
   })
 }
 
@@ -40,12 +38,12 @@ export const getAdminArticles = ({dispatch}, opts) => {
   })
 }
 
-export const getNewArticles = (ctx) => {
+export const getNewArticles = ({dispatch}) => {
   api.getArticleList({
     start: 0,
     limit: 5
   }).then(function (res) {
-    ctx.commit(types.GET_NEW_ARTICLES, res.body.articleList)
+    dispatch(types.GET_NEW_ARTICLES, res.body)
   })
 }
 
@@ -71,7 +69,7 @@ export const editArticle = ({dispatch}, opts) => {
 
 export const removeArticleById = ({dispatch}, opts) => {
   return api.removeArticleById(opts).then(function (res) {
-    if (res.body.success) {
+    if (res.body.ok) {
       dispatch(types.SHOW_MESSAGE, res.body.message)
     } else {
       dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
@@ -85,7 +83,7 @@ export const distoryModelMessage = ({dispatch}) => {
 
 export const userLogin = ({dispatch}, opts) => {
   return api.userLogin(opts).then(function (res) {
-    if (res.body.success) {
+    if (res.body.ok) {
       cookies.set('token', res.body.token, { expires: 7 })
       dispatch(types.SHOW_MESSAGE, res.body.message)
     } else {
@@ -96,7 +94,7 @@ export const userLogin = ({dispatch}, opts) => {
 
 export const userRegister = ({dispatch}, opts) => {
   return api.userRegister(opts).then(function (res) {
-    if (res.body.success) {
+    if (res.body.ok) {
       dispatch(types.SHOW_MESSAGE, res.body.message)
     } else {
       dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)

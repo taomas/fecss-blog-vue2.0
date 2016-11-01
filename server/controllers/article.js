@@ -97,7 +97,7 @@ const getArchiveList = async(ctx, next) => {
 const getTagsList = async(ctx, next) => {
   let tagsList = []
   let articleList = await article.query({})
-
+  
   if (articleList) {
     articleList.forEach((item) => {
       if (!tagsList.includes(item.tags)) {

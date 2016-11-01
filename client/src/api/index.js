@@ -1,23 +1,24 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
-import store from '../store/index'
+// import store from '../store/index'
 
 Vue.use(VueResource)
 
 Vue.http.interceptors.push((request, next) => {
-  store.commit('TOOGLE_LOADING', true)
+  // store.commit('TOOGLE_LOADING', true)
   next((response) => {
-    store.commit('TOOGLE_LOADING', false)
+    // store.commit('TOOGLE_LOADING', false)
     if (response.status === 401) {
       window.location.hash = '#!/login'
     }
   })
 })
 
-const API_ROOT = 'http://127.0.0.1:3000/'
-const articleResource = Vue.resource(API_ROOT + 'articles{/id}{/controller}')
-const usersResource = Vue.resource(API_ROOT + 'users{/id}')
-const adminResource = Vue.resource(API_ROOT + 'admin{/id}')
+const API_ROOT = 'http://127.0.0.1:3000'
+const apiResource = Vue.resource(API_ROOT + '{/id}{/controller}')
+const articleResource = Vue.resource(API_ROOT + '/articles{/id}{/controller}')
+const usersResource = Vue.resource(API_ROOT + '/users{/id}')
+const adminResource = Vue.resource(API_ROOT + '/admin{/id}')
 
 export default {
   getArticleDetail (id) {
@@ -27,13 +28,13 @@ export default {
     return articleResource.get({id: '', ...opts})
   },
   getArchiveArticles () {
-    return articleResource.get({id: 'archive'})
+    return apiResource.get({id: 'archive'})
   },
   getTagsList (opts) {
-    return articleResource.get({id: 'tags', ...opts})
+    return apiResource.get({id: 'tags', ...opts})
   },
   getTagsContent (tags) {
-    return articleResource.get({id: 'tags', 'controller': tags})
+    return apiResource.get({id: 'tags', 'controller': tags})
   },
   removeArticleById (opts) {
     return adminResource.save({id: 'delete'}, opts)

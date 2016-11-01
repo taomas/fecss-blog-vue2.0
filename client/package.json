@@ -12,6 +12,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
+    "js-cookie": "^2.1.3",
     "postcss-url": "^5.1.2",
     "precss": "^1.4.0",
     "vue": "^2.0.1",

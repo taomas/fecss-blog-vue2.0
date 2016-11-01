@@ -1,6 +1,6 @@
 <template>
   <div class="aside-left ly-col-4">
-    <div class="aside-panel">
+    <div class="aside-left-panel">
       <div class="aside-head-avator">
         <img class="aside-head-img" src="../assets/image/avatar.jpg" alt="" />
         <h3 class="aside-head-title">
@@ -42,14 +42,13 @@ export default {
 </script>
 
 <style scoped>
-
 .aside-left {
   position: relative;
   height: 100%;
   overflow: hidden;
 }
 
-.aside-panel {
+.aside-left-panel {
   position: fixed;
   top: 80px;
   width: 187px;

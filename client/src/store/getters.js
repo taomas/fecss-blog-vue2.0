@@ -1,1 +1,13 @@
-export const inTheaters = state => state.inTheaters
+export const articleDetail = state => state.articleDetail
+export const articleList = state => state.articleList
+export const newArticles = state => state.newArticles
+export const modelMessage = state => state.modelMessage
+export const errorMessage = state => state.errorMessage
+export const startIndex = state => state.startIndex
+export const maxIndex = state => state.maxIndex
+export const adminArticles = state => state.adminArticles
+export const archiveArticles = state => state.archiveArticles
+export const tagsList = state => state.tagsList
+export const tagsContent = state => state.tagsContent
+export const editArticle = state => state.editArticle
+export const showLoading = state => state.showLoading
