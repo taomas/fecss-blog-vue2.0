@@ -38,7 +38,8 @@ let mutations = {
   [types.GET_TAGS_CONTENT] (state, tagsContent) {
     state.tagsContent = tagsContent
   },
-  [types.SHOW_MESSAGE] (state, message) {
+  [types.SHOW_SUCCESS_MESSAGE] (state, message) {
+    console.log(message)
     state.modelMessage = message
   },
   [types.SHOW_ERROR_MESSAGE] (state, message) {
@@ -48,8 +49,7 @@ let mutations = {
     state.newArticles = articleList
   },
   [types.GET_ADMIN_ARTICLES] (state, adminArticles) {
-    state.adminArticles = adminArticles.articles
-    state.maxIndex = adminArticles.maxIndex
+    state.adminArticles = adminArticles.articleList
   },
   [types.UPDATE_EDIT_ARTICLE] (state, editArticle) {
     state.editArticle = editArticle

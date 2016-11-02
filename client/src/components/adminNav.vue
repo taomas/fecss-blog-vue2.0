@@ -1,9 +1,21 @@
 <template>
   <div class="admin-head">
     <ul class="admin-head-nav">
-      <li class="admin-head-item admin-btn-home" v-link="{name: 'home'}">首页</li>
-      <li class="admin-head-item admin-btn-home" v-link="{name: 'admin'}">控制台</li>
-      <li class="admin-head-item admin-btn-home" v-link="{name: 'write'}">新增文章</li>
+      <li class="admin-head-item admin-btn-home">
+        <router-link :to="{name: 'home'}">
+          首页
+        </router-link>
+      </li>
+      <li class="admin-head-item admin-btn-home">
+        <router-link :to="{name: 'home'}">
+          控制台
+        </router-link>
+      </li>
+      <li class="admin-head-item admin-btn-home">
+        <router-link :to="{name: 'write'}">
+          新增文章
+        </router-link>
+      </li>
       <slot></slot>
     </ul>
   </div>
@@ -47,6 +59,9 @@ export default {
     &:hover {
       background: #5b6064;
       color: #f5f5f5;
+    }
+    a {
+      color: #000;
     }
   }
   .admin-btn-confirm {

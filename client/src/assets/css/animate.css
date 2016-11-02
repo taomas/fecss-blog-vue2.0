@@ -6,3 +6,11 @@
 .fadeIn-enter, .fadeIn-leave {
   opacity: 0;
 }
+
+.slideIn-enter-active, .slideIn-leave-active {
+  transition: all .3s ease-out;
+  transform: scale(1);
+}
+.slideIn-enter, .slideIn-leave-active {
+  transform: scale(0);
+}

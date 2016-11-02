@@ -52,11 +52,6 @@ export default {
       limit: 5
     }
   },
-  filters: {
-    // substrArticle (value) {
-    //   return value.substr(0, 50)
-    // }
-  },
   computed: {
     ...mapGetters({
       articleList: 'articleList',

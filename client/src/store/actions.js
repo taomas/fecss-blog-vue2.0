@@ -34,9 +34,10 @@ export const getTagsContent = (ctx, tags) => {
   })
 }
 
-export const getAdminArticles = ({dispatch}, opts) => {
+export const getAdminArticles = (ctx, opts) => {
   api.getAdminArticles(opts).then(function (res) {
-    dispatch(types.GET_ADMIN_ARTICLES, res.body)
+    console.log(res.body)
+    ctx.commit(types.GET_ADMIN_ARTICLES, res.body)
   })
 }
 
@@ -49,61 +50,62 @@ export const getNewArticles = (ctx) => {
   })
 }
 
-export const createArticle = ({dispatch}, opts) => {
+export const createArticle = (ctx, opts) => {
   return api.createArticle(opts).then(function (res) {
     if (res.body.success) {
-      dispatch(types.SHOW_MESSAGE, res.body.message)
+      ctx.commit(types.SHOW_SUCCESS_MESSAGE, res.body.message)
     } else {
-      dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
+      ctx.commit(types.SHOW_ERROR_MESSAGE, res.body.message)
     }
   })
 }
 
-export const editArticle = ({dispatch}, opts) => {
+export const editArticle = (ctx, opts) => {
   api.editArticle(opts).then(function (res) {
     if (res.body.success) {
-      dispatch(types.SHOW_MESSAGE, res.body.message)
+      ctx.commit(types.SHOW_SUCCESS_MESSAGE, res.body.message)
     } else {
-      dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
+      ctx.commit(types.SHOW_ERROR_MESSAGE, res.body.message)
     }
   })
 }
 
-export const removeArticleById = ({dispatch}, opts) => {
+export const removeArticleById = (ctx, opts) => {
   return api.removeArticleById(opts).then(function (res) {
     if (res.body.success) {
-      dispatch(types.SHOW_MESSAGE, res.body.message)
+      ctx.commit(types.SHOW_SUCCESS_MESSAGE, res.body.message)
     } else {
-      dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
+      ctx.commit(types.SHOW_ERROR_MESSAGE, res.body.message)
     }
   })
 }
 
-export const distoryModelMessage = ({dispatch}) => {
-  dispatch(types.SHOW_MESSAGE, '')
+export const destroyModelMessage = (ctx) => {
+  ctx.commit(types.SHOW_SUCCESS_MESSAGE, '')
+  ctx.commit(types.SHOW_ERROR_MESSAGE, '')
 }
 
-export const userLogin = ({dispatch}, opts) => {
+export const showErrorMessage = (ctx, message) => {
+  ctx.commit(types.SHOW_ERROR_MESSAGE, message)
+}
+
+export const userLogin = (ctx, opts) => {
   return api.userLogin(opts).then(function (res) {
     if (res.body.success) {
       cookies.set('token', res.body.token, { expires: 7 })
-      dispatch(types.SHOW_MESSAGE, res.body.message)
+      ctx.commit(types.SHOW_SUCCESS_MESSAGE, res.body.message)
     } else {
-      dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
+      ctx.commit(types.SHOW_ERROR_MESSAGE, res.body.message)
     }
   })
 }
 
-export const userRegister = ({dispatch}, opts) => {
+export const userRegister = (ctx, opts) => {
   return api.userRegister(opts).then(function (res) {
     if (res.body.success) {
-      dispatch(types.SHOW_MESSAGE, res.body.message)
+      ctx.commit(types.SHOW_SUCCESS_MESSAGE, res.body.message)
     } else {
-      dispatch(types.SHOW_ERROR_MESSAGE, res.body.message)
+      ctx.commit(types.SHOW_ERROR_MESSAGE, res.body.message)
     }
   })
-}
-
-export const showErrorMessage = ({dispatch}, message) => {
-  dispatch(types.SHOW_ERROR_MESSAGE, message)
 }

@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Home from './views/Home.vue'
-import Tags from './views/Tags.vue'
+import Login from './views/Login.vue'
+import Admin from './views/Admin.vue'
 
 import Archive from './components/Archive'
 import ArticleList from './components/ArticleList'
@@ -44,9 +45,14 @@ const routes = [
     ]
   },
   {
-    path: '/tags',
-    name: 'tags',
-    component: Tags
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/admin',
+    name: 'admin',
+    component: Admin
   }
 ]
 

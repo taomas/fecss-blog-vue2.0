@@ -1,40 +1,44 @@
 <template>
   <div class="admin">
-    <admin-nav></admin-nav>
+    <AdminNav></AdminNav>
     <div class="admin-content">
-      <ul class="admin-table-head rd-row-flex">
+      <ul class="admin-table-head ly-row-flex">
         <li class="table-head-title">标题</li>
         <li class="table-head-time">日期</li>
         <li class="table-head-operate">选项</li>
       </ul>
       <ul class="admin-table-content">
-        <li class="admin-table-item rd-row-flex" v-for="article in adminArticles">
-          <div class="table-content-title"
-            v-link="{name: 'page', params: {id: article._id}}">
-            {{article.title}}
+        <li class="admin-table-item ly-row-flex"
+          v-for="article in adminArticles">
+          <div class="table-content-title">
+            <router-link :to="{name: 'page', params: {id: article._id}}">
+              {{article.title}}
+            </router-link>
           </div>
           <div class="table-content-time">
             {{article.createTime}}
           </div>
           <div class="table-content-operate">
-            <i class="icon-edit ion-edit"
-              v-link="{name: 'edit', params: {id: article._id}}"
-            ></i>
+            <router-link :to="{name: 'edit', params: {id: article._id}}">
+              <i class="icon-edit ion-edit">
+              </i>
+            </router-link>
             <i class="icon-delete ion-trash-a"
               @click="evtRemoveArticle(article._id)"
             ></i>
           </div>
         </li>
       </ul>
-      <page-nav :start="start"></page-nav>
+      <PageNav :start="start"></PageNav>
     </div>
   </div>
 </template>
 
 <script>
-import { getAdminArticles, removeArticleById } from '../vuex/actions'
-import adminNav from './common/adminNav'
-import pageNav from './common/pageNav'
+import { mapGetters, mapActions } from 'vuex'
+import AdminNav from '../components/AdminNav'
+import PageNav from '../components/PageNav'
+
 export default {
   data () {
     return {
@@ -42,7 +46,15 @@ export default {
       limit: 5
     }
   },
+  computed: {
+    ...mapGetters({
+      startIndex: 'startIndex',
+      articleList: 'articleList',
+      adminArticles: 'adminArticles'
+    })
+  },
   methods: {
+    ...mapActions(['getAdminArticles', 'removeArticleById']),
     evtToggleNext () {
       this.start++
       const opts = {
@@ -76,26 +88,15 @@ export default {
       })
     }
   },
-  ready () {
+  created () {
     this.getAdminArticles({
       start: 0,
       limit: 5
     })
   },
-  vuex: {
-    getters: {
-      startIndex: state => state.startIndex,
-      articleList: state => state.articleList,
-      adminArticles: state => state.adminArticles
-    },
-    actions: {
-      getAdminArticles,
-      removeArticleById
-    }
-  },
   components: {
-    'admin-nav': adminNav,
-    'page-nav': pageNav
+    AdminNav,
+    PageNav
   }
 }
 </script>
@@ -165,6 +166,9 @@ export default {
     text-overflow: ellipsis;
     text-align: left;
     cursor: pointer;
+    a {
+      color: #333;
+    }
   }
   .table-content-time {
     width: 25%;

@@ -14,6 +14,7 @@ const login = async (ctx, next) => {
   if (loginUser) {
     ctx.body = {
       success: true,
+      message: '用户登陆成功',
       user: loginUser,
       token: token
     }
