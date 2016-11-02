@@ -32,11 +32,9 @@ export default {
         {name: '文章', sourceLink: 'home'},
         {name: '分类', sourceLink: 'archive'},
         {name: '标签', sourceLink: 'tags'},
-        {name: '站长登陆', sourceLink: 'login'}
+        {name: '站长登陆', sourceLink: 'admin'}
       ]
     }
-  },
-  methods: {
   }
 }
 </script>

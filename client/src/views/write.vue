@@ -4,7 +4,7 @@
       <li class="write-btn-confirm"
         @click="evtCreateArticle">发布</li>
     </admin-nav>
-    <editor v-ref:editor></editor>
+    <!-- <editor v-ref:editor></editor> -->
   </div>
 </template>
 

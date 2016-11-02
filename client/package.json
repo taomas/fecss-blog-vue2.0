@@ -20,7 +20,8 @@
     "vue": "^2.0.1",
     "vue-resource": "^1.0.3",
     "vue-router": "^2.0.1",
-    "vuex": "^2.0.0"
+    "vuex": "^2.0.0",
+    "wangeditor": "^2.1.22"
   },
   "devDependencies": {
     "autoprefixer": "^6.4.0",

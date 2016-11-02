@@ -11,7 +11,7 @@
         <li class="admin-table-item ly-row-flex"
           v-for="article in adminArticles">
           <div class="table-content-title">
-            <router-link :to="{name: 'page', params: {id: article._id}}">
+            <router-link :to="{name: 'article', params: {id: article._id}}">
               {{article.title}}
             </router-link>
           </div>
