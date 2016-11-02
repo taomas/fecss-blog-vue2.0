@@ -2,9 +2,9 @@ import cookies from 'js-cookie'
 import api from '../api'
 import * as types from './mutation-types'
 
-export const getArticleDetail = ({dispatch}, opts) => {
+export const getArticleDetail = (ctx, opts) => {
   api.getArticleDetail(opts).then(function (res) {
-    dispatch(types.GET_ARTICLE_DETAIL, res.body.article)
+    ctx.commit(types.GET_ARTICLE_DETAIL, res.body.article)
   })
 }
 

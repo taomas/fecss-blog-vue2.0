@@ -7,6 +7,7 @@ import Tags from './views/Tags.vue'
 
 import Archive from './components/Archive'
 import ArticleList from './components/ArticleList'
+import Article from './components/Article'
 import TagsList from './components/TagsList'
 import TagsContent from './components/TagsContent'
 
@@ -19,6 +20,11 @@ const routes = [
         path: '',
         name: 'home',
         component: ArticleList
+      },
+      {
+        path: 'article/:id',
+        name: 'article',
+        component: Article
       },
       {
         path: 'archive',

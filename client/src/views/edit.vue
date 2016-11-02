@@ -13,10 +13,6 @@ import { getArticleDetail, editArticle } from '../vuex/actions'
 import adminNav from './common/adminNav'
 import editor from './common/editor'
 export default {
-  data () {
-    return {
-    }
-  },
   computed: {
     title () {
       return this.$refs.editor.title

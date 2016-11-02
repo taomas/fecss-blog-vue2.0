@@ -11,7 +11,7 @@
       <ul class="sidebar-posts-list">
         <li class="sidebar-posts-item"
           v-for="article in newArticles">
-          <router-link :to="{name: 'page', params: {id: article._id}}">
+          <router-link :to="{name: 'article', params: {id: article._id}}">
             {{article.title}}
           </router-link>
         </li>

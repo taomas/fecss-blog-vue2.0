@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
-// import store from '../store/index'
+import store from '../store/index'
 
 Vue.use(VueResource)
 
 Vue.http.interceptors.push((request, next) => {
-  // store.commit('TOOGLE_LOADING', true)
+  store.commit('TOOGLE_LOADING', true)
   next((response) => {
-    // store.commit('TOOGLE_LOADING', false)
+    store.commit('TOOGLE_LOADING', false)
     if (response.status === 401) {
       window.location.hash = '#!/login'
     }

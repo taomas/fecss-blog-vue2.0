@@ -8,13 +8,13 @@
         v-show="showLoading === false">
         <ul class="posts-article-list">
           <li class="posts-article-item" v-for="article in articleList">
-            <h4 class="article-head-title">
-              <router-link :to="{name: 'page', params: {id: article._id}}">
+            <h3 class="article-head-title">
+              <router-link :to="{name: 'article', params: {id: article._id}}">
                 {{article.title}}
               <router-link :to="{name: 'tagsContent', params: {id: article.tags}}">
-            </h4>
+            </h3>
             <span class="article-head-time">{{article.createTime}}</span>
-            <p class="article-content-desc" v-html="article.markedArticle">
+            <p class="article-content-desc" v-html="article.substrArticle">
             </p>
             <div class="article-content-nav clearfix">
               <div class="article-tags ly-row-flex">
@@ -28,7 +28,7 @@
                 </ul>
               </div>
               <span class="article-readmore">
-                <router-link :to="{name: 'page', params: {id: article._id}}">
+                <router-link :to="{name: 'article', params: {id: article._id}}">
                   查看更多>>
                 </router-link>
               </span>
@@ -53,9 +53,9 @@ export default {
     }
   },
   filters: {
-    substrArticle (value) {
-      return value.substr(0, 50)
-    }
+    // substrArticle (value) {
+    //   return value.substr(0, 50)
+    // }
   },
   computed: {
     ...mapGetters({
@@ -169,10 +169,8 @@ export default {
 
 .article-content-desc {
   width: 100%;
-  max-height: 100px;
   margin: 0;
   color: #7f7f7f;
-  overflow: hidden;
 }
 
 .article-content-nav {

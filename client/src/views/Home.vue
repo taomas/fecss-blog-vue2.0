@@ -3,26 +3,28 @@
     <AsideLeft></AsideLeft>
     <router-view></router-view>
     <AsideRight></AsideRight>
+    <Prograssbar></Prograssbar>
   </div>
 </template>
 
 <script>
 import AsideLeft from '../components/AsideLeft'
 import AsideRight from '../components/AsideRight'
+import Prograssbar from '../components/Prograssbar'
 
 export default {
   name: 'home',
   components: {
     AsideLeft,
-    AsideRight
-  },
-  ready () {
+    AsideRight,
+    Prograssbar
   }
 }
 </script>
 
 <style>
 @import '../assets/css/index';
+@import '../assets/css/marked';
 
 .home-container {
   position: relative;

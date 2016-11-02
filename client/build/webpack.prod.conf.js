@@ -9,6 +9,7 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var env = process.env.NODE_ENV === 'testing'
   ? require('../config/test.env')
   : config.build.env
+var jquery = require('jquery')
 
 var webpackConfig = merge(baseWebpackConfig, {
   module: {
@@ -27,6 +28,9 @@ var webpackConfig = merge(baseWebpackConfig, {
     })
   },
   plugins: [
+    new webpack.ProvidePlugin({
+      $: 'jquery'
+    }),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
     new webpack.DefinePlugin({
       'process.env': env

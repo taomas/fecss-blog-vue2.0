@@ -18,7 +18,7 @@
 
 <script>
 import highlight from 'highlight.js'
-import { getArticleDetail } from '../../vuex/actions'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -27,6 +27,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      articleDetail: 'articleDetail',
+      showLoading: 'showLoading'
+    }),
     articleId () {
       return this.$route.params.id
     }
@@ -47,39 +51,32 @@ export default {
     articleDetail () {
       window.setTimeout(() => {
         this.updateMarkedStyle()
-      }, 0)
+      }, 300)
     }
   },
   methods: {
+    ...mapActions(['getArticleDetail']),
     toggleScrollTop () {
       $(window).scrollTop(0)
     },
     updateMarkedStyle () {
       // 数据返回后高亮代码块
-      $('pre code').each(function (i, block) {
+      $('pre').each(function (i, block) {
         highlight.highlightBlock(block)
       })
+
       $('.hljs').each(function (i, item) {
         let $this = $(item)
-        let matchLang = $this.attr('class').match(/lang\-[a-z]+/)
+        let matchLang = $this.find('code').attr('class').match(/lang-[a-z]+/)
         let language = matchLang ? matchLang[0].split('-')[1] : 'code'
         $this.attr('data-language', language)
       })
       $('a').attr('target', '_blank')
     }
   },
-  ready () {
+  created () {
     this.getArticleDetail(this.articleId)
     this.toggleScrollTop()
-  },
-  vuex: {
-    getters: {
-      articleDetail: state => state.articleDetail,
-      showLoading: state => state.showLoading
-    },
-    actions: {
-      getArticleDetail
-    }
   }
 }
 </script>
@@ -104,8 +101,8 @@ export default {
   border-radius: 5px;
   margin-bottom: 30px;
   transition: all 0.3s;
-  opacity: 0;
   word-break: break-all;
+  opacity: 0;
 }
 
 .transition-show {
@@ -133,6 +130,5 @@ export default {
   font-size: 14px;
   line-height: 20pt;
 }
-
 
 </style>

@@ -53,6 +53,9 @@ let mutations = {
   },
   [types.UPDATE_EDIT_ARTICLE] (state, editArticle) {
     state.editArticle = editArticle
+  },
+  [types.TOOGLE_LOADING] (state, showLoading) {
+    state.showLoading = showLoading
   }
 }
 

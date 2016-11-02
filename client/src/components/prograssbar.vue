@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   data () {
     return {
@@ -23,12 +24,17 @@ export default {
       }
     }
   },
+  computed: {
+    ...mapGetters({
+      showLoading: 'showLoading'
+    })
+  },
   methods: {
     start () {
       this.progressStatus = true
       this.percent = 0
       this.startTimer = window.setInterval(() => {
-        if (this.percent < 100) {
+        if (this.percent < 80) {
           this.percent = this.percent + Math.random() * 20
         }
       }, 100)
@@ -42,11 +48,6 @@ export default {
       setTimeout(() => {
         this.progressStatus = false
       }, 300)
-    }
-  },
-  vuex: {
-    getters: {
-      showLoading: state => state.showLoading
     }
   }
 }

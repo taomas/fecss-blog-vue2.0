@@ -11,3 +11,7 @@ export const mergeName = (names) => {
   }
   return name
 }
+
+export const substrArticle = (string) => {
+  return string.substr(0, 100) + '...'
+}

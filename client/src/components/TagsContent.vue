@@ -5,7 +5,7 @@
       transition="fadeIn"
       v-show="showLoading === false">
       <section class="tags">
-        <h2 class="tags-year">{{tagsContent[0].tags}}</h2>
+        <h2 class="tags-year">{{tags}}</h2>
         <ul class="tags-list">
           <li class="tags-item"
             v-for="item in tagsContent">
@@ -29,7 +29,13 @@ export default {
     ...mapGetters({
       tagsContent: 'tagsContent',
       showLoading: 'showLoading'
-    })
+    }),
+    tags () {
+      if (this.tagsContent[0]) {
+        return this.tagsContent[0].tags
+      }
+      return ''
+    }
   },
   methods: {
     ...mapActions(['getTagsContent'])
