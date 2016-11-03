@@ -8,8 +8,7 @@
       <div class="editor-menu">
         <ul class="editor-menu-list menu-list-left">
           <template
-            v-for="item in menus"
-            track-by="$index">
+            v-for="item in menus">
               <li
                 v-if="item === 'line'"
                 class="verticle-line"></li>
@@ -102,7 +101,7 @@ export default {
       })
       $('.hljs').each(function (i, item) {
         let $this = $(item)
-        let matchLang = $this.attr('class').match(/lang\-[a-z]+/)
+        let matchLang = $this.attr('class').match(/lang-[a-z]+/)
         let language = matchLang ? matchLang[0].split('-')[1] : 'code'
         $this.attr('data-language', language)
       })
@@ -134,7 +133,7 @@ export default {
       this.pullStatus = 'pull-center'
     }
   },
-  ready () {
+  created () {
     this.editor = new Editor($('.editor-panel-textarea')[0], this)
   },
   components: {
@@ -215,7 +214,7 @@ input {
       display: block;
       width: 20px;
       height: 20px;
-      background: url('../../assets/img/editor@2x.png');
+      background: url('../assets/image/editor@2x.png');
       background-size: 380px 60px;
       cursor: pointer;
     }

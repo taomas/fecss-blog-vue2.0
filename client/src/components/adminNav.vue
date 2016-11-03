@@ -56,12 +56,14 @@ export default {
     border-right: 1px solid #ccc;
     background: #fff;
     cursor: pointer;
-    &:hover {
-      background: #5b6064;
-      color: #f5f5f5;
-    }
     a {
       color: #000;
+    }
+    &:hover {
+      background: #5b6064;
+      a {
+        color: #f5f5f5;
+      }
     }
   }
   .admin-btn-confirm {

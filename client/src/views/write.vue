@@ -4,14 +4,15 @@
       <li class="write-btn-confirm"
         @click="evtCreateArticle">发布</li>
     </admin-nav>
-    <!-- <editor v-ref:editor></editor> -->
+    <editor v-ref:editor></editor>
   </div>
 </template>
 
 <script>
-import { createArticle } from '../vuex/actions'
-import adminNav from './common/adminNav'
-import editor from './common/editor'
+// import { createArticle } from '../vuex/actions'
+import { mapGetters, mapActions } from 'vuex'
+import AdminNav from '../components/AdminNav'
+import editor from '../components/editor'
 
 export default {
   data () {
@@ -19,6 +20,10 @@ export default {
     }
   },
   computed: {
+    ...mapGetters({
+      editArticle: 'editArticle',
+      modelMessage: 'modelMessage'
+    }),
     title () {
       return this.$refs.editor.title
     },
@@ -42,6 +47,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['createArticle']),
     verifyInfo () {
       if ($.trim(this.title) === '') {
         return '请输入标题！'
@@ -76,17 +82,8 @@ export default {
       this.createArticle(opts)
     }
   },
-  vuex: {
-    getters: {
-      editArticle: state => state.editArticle,
-      modelMessage: state => state.modelMessage
-    },
-    actions: {
-      createArticle
-    }
-  },
   components: {
-    'admin-nav': adminNav,
+    'admin-nav': AdminNav,
     'editor': editor
   }
 }

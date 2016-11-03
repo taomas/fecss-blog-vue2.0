@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 import Home from './views/Home.vue'
 import Login from './views/Login.vue'
 import Admin from './views/Admin.vue'
+import Write from './views/Write.vue'
 
 import Archive from './components/Archive'
 import ArticleList from './components/ArticleList'
@@ -53,6 +54,11 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: Admin
+  },
+  {
+    path: '/write',
+    name: 'write',
+    component: Write
   }
 ]
 

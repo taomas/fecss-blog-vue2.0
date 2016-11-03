@@ -102,6 +102,8 @@ export default {
 </script>
 
 <style scoped>
+@import '../assets/css/ionicicon';
+
 .admin-content {
   width: 70%;
   height: auto;
@@ -183,9 +185,11 @@ export default {
     text-align: right;
     .icon-edit {
       margin-right: 15px;
+      color: #444;
       cursor: pointer;
     }
     .icon-delete {
+      color: #444;
       cursor: pointer;
     }
   }

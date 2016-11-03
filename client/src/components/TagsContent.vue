@@ -11,7 +11,7 @@
             v-for="item in tagsContent">
             <span class="post-time">{{item.createTime}}</span>
             <router-link class="post-title-link"
-              :to="{name: 'page', params: {id: item._id}}">
+              :to="{name: 'article', params: {id: item._id}}">
               {{item.title}}
             </router-link>
           </li>
