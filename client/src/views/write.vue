@@ -4,15 +4,14 @@
       <li class="write-btn-confirm"
         @click="evtCreateArticle">发布</li>
     </admin-nav>
-    <editor v-ref:editor></editor>
+    <editor ref="editor"></editor>
   </div>
 </template>
 
 <script>
-// import { createArticle } from '../vuex/actions'
 import { mapGetters, mapActions } from 'vuex'
 import AdminNav from '../components/AdminNav'
-import editor from '../components/editor'
+import Editor from '../components/Editor'
 
 export default {
   data () {
@@ -84,7 +83,7 @@ export default {
   },
   components: {
     'admin-nav': AdminNav,
-    'editor': editor
+    'editor': Editor
   }
 }
 </script>

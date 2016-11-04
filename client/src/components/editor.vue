@@ -2,7 +2,7 @@
   <div class="editor-container">
     <input class="write-head-title" type="text" name="title" placeholder="请输入标题"
       v-model="title">
-    <input class="write-head-tags" type="text" name="name" name="tags" value="" placeholder="标签"
+    <input class="write-head-tags" type="text" name="tags" value="" placeholder="标签"
       v-model="tags">
     <div class="editor-content">
       <div class="editor-menu">
@@ -14,7 +14,8 @@
                 class="verticle-line"></li>
               <li class="editor-menu-item"
                 v-if="item !== 'line'">
-                <i class="menu-icon menu-icon-{{item}}"
+                <i class="menu-icon"
+                  :class="item | oprateIconName"
                   @click="evtInsert(item)"
                 ></i>
               </li>
@@ -39,7 +40,7 @@
           </li>
         </ul>
       </div>
-      <div class="editor-content-panel rd-row-flex"
+      <div class="editor-content-panel ly-row-flex"
         :class="pullStatus">
         <textarea class="editor-panel-textarea"
           debounce="300"
@@ -57,7 +58,7 @@
 </template>
 
 <script>
-import Editor from '../../util/editor.js'
+import Editor from '../assets/js/editor.js'
 import highlight from 'highlight.js'
 import marked from 'marked'
 import editorModal from './editorModal'
@@ -75,6 +76,11 @@ export default {
       insertType: '',
       editor: {}
     }
+  },
+  filters: {
+    // oprateName (value) {
+    //   return 'menu-icon' + value
+    // }
   },
   computed: {
     markedArticle () {
@@ -133,8 +139,10 @@ export default {
       this.pullStatus = 'pull-center'
     }
   },
-  created () {
-    this.editor = new Editor($('.editor-panel-textarea')[0], this)
+  mounted () {
+    this.$nextTick(() => {
+      this.editor = new Editor($('.editor-panel-textarea')[0], this)
+    })
   },
   components: {
     'editor-modal': editorModal

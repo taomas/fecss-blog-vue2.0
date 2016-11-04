@@ -15,3 +15,7 @@ export const mergeName = (names) => {
 export const substrArticle = (string) => {
   return string.substr(0, 100) + '...'
 }
+
+export const oprateIconName = (value) => {
+  return 'menu-icon' + value
+}
