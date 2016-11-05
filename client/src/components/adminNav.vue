@@ -7,7 +7,7 @@
         </router-link>
       </li>
       <li class="admin-head-item admin-btn-home">
-        <router-link :to="{name: 'home'}">
+        <router-link :to="{name: 'admin'}">
           控制台
         </router-link>
       </li>
@@ -57,6 +57,9 @@ export default {
     background: #fff;
     cursor: pointer;
     a {
+      display: block;
+      width: 100%;
+      height: 100%;
       color: #000;
     }
     &:hover {

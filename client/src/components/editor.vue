@@ -15,7 +15,7 @@
               <li class="editor-menu-item"
                 v-if="item !== 'line'">
                 <i class="menu-icon"
-                  :class="item | oprateIconName"
+                  :class="spliceIconClass(item)"
                   @click="evtInsert(item)"
                 ></i>
               </li>
@@ -50,10 +50,10 @@
         </div>
       </div>
     </div>
-    <editor-modal
+    <EditorModal
       :modal-show="modalShow"
       :modal-title="modalTitle">
-      </editor-modal>
+      </EditorModal>
   </div>
 </template>
 
@@ -61,7 +61,7 @@
 import Editor from '../assets/js/editor.js'
 import highlight from 'highlight.js'
 import marked from 'marked'
-import editorModal from './editorModal'
+import EditorModal from './EditorModal'
 export default {
   data () {
     return {
@@ -101,6 +101,9 @@ export default {
     }
   },
   methods: {
+    spliceIconClass (className) {
+      return 'menu-icon-' + className
+    },
     updateMarkedStyle () {
       $('pre code').each(function (i, block) {
         highlight.highlightBlock(block)
@@ -145,7 +148,7 @@ export default {
     })
   },
   components: {
-    'editor-modal': editorModal
+    EditorModal
   }
 }
 </script>

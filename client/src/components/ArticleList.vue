@@ -125,6 +125,7 @@ export default {
 }
 
 .posts-article-list {
+  min-height: 435px;
   .posts-article-item {
     position: relative;
     padding: 15px 30px 10px;
