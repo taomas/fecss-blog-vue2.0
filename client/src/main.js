@@ -7,7 +7,7 @@ import modal from './mixins/modal.js'
 
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
 
-// test123
+// test1234
 Vue.mixin({
   created: function () {
     if (!this.$root.MODAL) {
