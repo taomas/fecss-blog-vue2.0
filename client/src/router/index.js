@@ -1,17 +1,17 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-Vue.use(VueRouter)
+import Router from 'vue-router'
+Vue.use(Router)
 
-import Home from './views/Home.vue'
-import Login from './views/Login.vue'
-import Admin from './views/Admin.vue'
-import Write from './views/Write.vue'
+import Home from '../views/Home.vue'
+import Login from '../views/Login.vue'
+import Admin from '../views/Admin.vue'
+import Write from '../views/Write.vue'
 
-import Archive from './components/Archive'
-import ArticleList from './components/ArticleList'
-import Article from './components/Article'
-import TagsList from './components/TagsList'
-import TagsContent from './components/TagsContent'
+import Archive from '../components/Archive'
+import ArticleList from '../components/ArticleList'
+import Article from '../components/Article'
+import TagsList from '../components/TagsList'
+import TagsContent from '../components/TagsContent'
 
 const routes = [
   {
@@ -62,6 +62,6 @@ const routes = [
   }
 ]
 
-export default new VueRouter({
+export default new Router({
   routes
 })

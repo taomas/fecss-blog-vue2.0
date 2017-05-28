@@ -126,4 +126,13 @@ export default {
 .slideIn-enter, .slideIn-leave-active {
   transform: scale(0);
 }
+
+.slideIn-enter {
+  transform: scale(0);
+}
+
+.slideIn-enter-active {
+  transition: all .3s ease-out;
+  transform: scale(1);
+}
 </style>

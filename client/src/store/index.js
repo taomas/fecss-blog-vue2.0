@@ -39,7 +39,6 @@ let mutations = {
     state.tagsContent = tagsContent
   },
   [types.SHOW_SUCCESS_MESSAGE] (state, message) {
-    console.log(message)
     state.modelMessage = message
   },
   [types.SHOW_ERROR_MESSAGE] (state, message) {

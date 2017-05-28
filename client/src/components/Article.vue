@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import highlight from 'highlight.js'
+// import highlight from 'highlight.js'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -57,21 +57,21 @@ export default {
   methods: {
     ...mapActions(['getArticleDetail']),
     toggleScrollTop () {
-      $(window).scrollTop(0)
+      // $(window).scrollTop(0)
     },
     updateMarkedStyle () {
       // 数据返回后高亮代码块
-      $('pre').each(function (i, block) {
-        highlight.highlightBlock(block)
-      })
+      // $('pre').each(function (i, block) {
+      //   highlight.highlightBlock(block)
+      // })
 
-      $('.hljs').each(function (i, item) {
-        let $this = $(item)
-        let matchLang = $this.find('code').attr('class').match(/lang-[a-z]+/)
-        let language = matchLang ? matchLang[0].split('-')[1] : 'code'
-        $this.attr('data-language', language)
-      })
-      $('a').attr('target', '_blank')
+      // $('.hljs').each(function (i, item) {
+      //   let $this = $(item)
+      //   let matchLang = $this.find('code').attr('class').match(/lang-[a-z]+/)
+      //   let language = matchLang ? matchLang[0].split('-')[1] : 'code'
+      //   $this.attr('data-language', language)
+      // })
+      // $('a').attr('target', '_blank')
     }
   },
   created () {
@@ -89,6 +89,7 @@ export default {
 .article-container {
   box-sizing: border-box;
   margin-left: 30px;
+  min-height: 435px;
   padding: 30px 20px;
   background: #fff;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 4px 10px rgba(0, 0, 0, 0.06);

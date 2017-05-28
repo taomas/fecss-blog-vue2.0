@@ -9,7 +9,6 @@ export default (Vue, $root) => {
     confirm: () => {}
   })
 
-  console.log('register-component')
   Vue.component('modal', modal)
 
   Vue.prototype.$Modal = {
