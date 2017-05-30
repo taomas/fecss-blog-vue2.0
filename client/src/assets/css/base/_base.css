@@ -1,6 +1,8 @@
 @import 'normalize';
 @import 'default';
 @import 'clearfix';
+@import 'layout';
+
 
 * {
   box-sizing: border-box;

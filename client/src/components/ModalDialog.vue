@@ -31,35 +31,35 @@ export default {
   },
   computed: {
     modal () {
-      return this.$root.MODAL
+      // return this.$root.MODAL
     },
     modalShow () {
-      let showStatus = this.$root.MODAL.show
-      if (showStatus) {
-        this.maskShow = showStatus
-      } else {
-        setTimeout(() => {
-          this.maskShow = showStatus
-        }, 300)
-      }
-      return showStatus
+      // let showStatus = this.$root.MODAL.show
+      // if (showStatus) {
+      //   this.maskShow = showStatus
+      // } else {
+      //   setTimeout(() => {
+      //     this.maskShow = showStatus
+      //   }, 300)
+      // }
+      // return showStatus
     }
   },
   methods: {
     ...mapActions(['destroyModelMessage']),
     confirm () {
-      if (this.modal.confirm) {
-        this.modal.confirm()
-      }
-      this.destroyModelMessage()
-      this.modal.show = false
+      // if (this.modal.confirm) {
+      //   this.modal.confirm()
+      // }
+      // this.destroyModelMessage()
+      // this.modal.show = false
     },
     cancel () {
-      if (this.modal.cancel) {
-        this.modal.cancel()
-      }
-      this.destroyModelMessage()
-      this.modal.show = false
+      // if (this.modal.cancel) {
+      //   this.modal.cancel()
+      // }
+      // this.destroyModelMessage()
+      // this.modal.show = false
     }
   },
   created () {
