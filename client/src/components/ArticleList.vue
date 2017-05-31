@@ -7,11 +7,11 @@
         transition="fadeIn"
         v-show="showLoading === false">
         <ul class="posts-article-list">
-          <li class="posts-article-item" v-for="article in articleList">
+          <li class="posts-article-item" v-for="article of articleList">
             <h3 class="article-head-title">
               <router-link :to="{name: 'article', params: {id: article._id}}">
                 {{article.title}}
-              <router-link :to="{name: 'tagsContent', params: {id: article.tags}}">
+              </router-link>
             </h3>
             <span class="article-head-time">{{article.createTime}}</span>
             <p class="article-content-desc" v-html="article.substrArticle">
@@ -78,6 +78,7 @@ export default {
     }
   },
   created () {
+    console.log(123)
     this.getArticleList({
       start: 0,
       limit: 5
@@ -101,7 +102,6 @@ export default {
     background: #fff;
     border-radius: 5px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 4px 10px rgba(0, 0, 0, 0.06);
-    margin-bottom: 30px;
   }
   .adaptor {
     min-height: 1000px;

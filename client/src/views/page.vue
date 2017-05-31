@@ -19,9 +19,9 @@ export default {
   },
   methods: {
     highlightCode () {
-      $('pre code').each(function (i, block) {
-        highlight.highlightBlock(block)
-      })
+      // $('pre code').each(function (i, block) {
+      //   highlight.highlightBlock(block)
+      // })
     }
   },
   components: {

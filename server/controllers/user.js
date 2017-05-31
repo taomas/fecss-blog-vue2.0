@@ -10,7 +10,7 @@ const login = async (ctx, next) => {
     original_iat: Date.now()
   }), 'shared-secret');
   const result = await user.query(opts)
-  const loginUser = result ? result[0] : ''
+  const loginUser = result.length ? result[0] : ''
   if (loginUser) {
     ctx.body = {
       success: true,

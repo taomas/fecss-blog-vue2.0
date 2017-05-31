@@ -1,7 +1,12 @@
 <template>
   <div class="admin-container">
     <div class="bg-login">
-      <img class="bg-login-img" src="../assets/image/loginbg.jpg" alt="" />
+      <img class="bg-login-img" src="../assets/image/loginbg.jpg" alt="" 
+        :style="{
+          width: bgimgConfig.width + 'px',
+          height: bgimgConfig.height + 'px',
+          'margin-top': bgimgConfig.top + 'px',
+          'margin-left': bgimgConfig.left + 'px'}"/>
     </div>
     <section class="admin-form">
       <h1 class="admin-home-logo ly-row-flex flex-center flex-middle">
@@ -21,7 +26,7 @@
       </div>
       <button class="admin-btn-login" type="button"
         @click="evtUserLogin">用户登陆</button>
-      <!-- <button class="admin-btn-register" type="button"
+       <!--<button class="admin-btn-register" type="button"
         @click="evtUserRegister">用户注册</button> -->
     </section>
     <ModalDialog></ModalDialog>
@@ -37,7 +42,15 @@ export default {
       username: '',
       password: '',
       modelContent: '',
-      showModel: false
+      showModel: false,
+      clientwidth: document.documentElement.clientWidth,
+      clientheight: document.documentElement.clientHeight,
+      bgimgConfig: {
+        width: '',
+        height: '',
+        left: '',
+        top: ''
+      }
     }
   },
   computed: {
@@ -63,25 +76,21 @@ export default {
       this.userRegister(opts)
     },
     evtImgAdaptor () {
-      let $window = $(window)
       this.toogleAdaptor()
-      $window.on('resize', () => {
-        this.toogleAdaptor()
-      })
+      window.onresize = this.toogleAdaptor
     },
     toogleAdaptor () {
-      let $window = $(window)
-      let viewWidth = $window.width()
-      let viewHeight = $window.height()
-      if (viewWidth > 1723) {
-        $('.bg-login-img').width(viewWidth)
+      let clientwidth = document.documentElement.clientWidth
+      let clientheight = document.documentElement.clientHeight
+      if (clientwidth > 1422) {
+        this.bgimgConfig.width = clientwidth
       } else {
-        $('.bg-login-img').width(1723).css('margin-left', (viewWidth - 1723) / 2 + 'px')
+        this.bgimgConfig.left = (clientwidth - 1422) / 2
       }
-      if (viewHeight > 800) {
-        $('.bg-login-img').height(viewHeight)
+      if (clientheight > 800) {
+        this.bgimgConfig.height = clientheight
       } else {
-        $('.bg-login-img').height(800).css('margin-top', (viewWidth - 800) / 2 + 'px')
+        this.bgimgConfig.top = (clientheight - 800) / 2
       }
     }
   },

@@ -48,21 +48,21 @@ export default {
   methods: {
     ...mapActions(['createArticle']),
     verifyInfo () {
-      if ($.trim(this.title) === '') {
-        return '请输入标题！'
-      }
+      // if ($.trim(this.title) === '') {
+      //   return '请输入标题！'
+      // }
 
-      if ($.trim(this.tags) === '') {
-        return '请输入标签！'
-      }
+      // if ($.trim(this.tags) === '') {
+      //   return '请输入标签！'
+      // }
 
-      if (this.tags.length > 15) {
-        return '您输入的标签过长！请重新输入'
-      }
+      // if (this.tags.length > 15) {
+      //   return '您输入的标签过长！请重新输入'
+      // }
 
-      if ($.trim(this.sourceArticle.length) < 30) {
-        return '文章内容不能少于30字'
-      }
+      // if ($.trim(this.sourceArticle.length) < 30) {
+      //   return '文章内容不能少于30字'
+      // }
       return false
     },
     evtCreateArticle () {

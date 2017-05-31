@@ -58,8 +58,8 @@
 </template>
 
 <script>
-import Editor from '../assets/js/editor.js'
-import highlight from 'highlight.js'
+// import Editor from '../assets/js/editor.js'
+// import highlight from 'highlight.js'
 import marked from 'marked'
 import EditorModal from './EditorModal'
 export default {
@@ -105,16 +105,16 @@ export default {
       return 'menu-icon-' + className
     },
     updateMarkedStyle () {
-      $('pre code').each(function (i, block) {
-        highlight.highlightBlock(block)
-      })
-      $('.hljs').each(function (i, item) {
-        let $this = $(item)
-        let matchLang = $this.attr('class').match(/lang-[a-z]+/)
-        let language = matchLang ? matchLang[0].split('-')[1] : 'code'
-        $this.attr('data-language', language)
-      })
-      $('a').attr('target', '_blank')
+      // $('pre code').each(function (i, block) {
+      //   highlight.highlightBlock(block)
+      // })
+      // $('.hljs').each(function (i, item) {
+      //   let $this = $(item)
+      //   let matchLang = $this.attr('class').match(/lang-[a-z]+/)
+      //   let language = matchLang ? matchLang[0].split('-')[1] : 'code'
+      //   $this.attr('data-language', language)
+      // })
+      // $('a').attr('target', '_blank')
     },
     modelConfirm (linkAddress) {
       this.modalShow = false
@@ -144,7 +144,7 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      this.editor = new Editor($('.editor-panel-textarea')[0], this)
+      // this.editor = new Editor($('.editor-panel-textarea')[0], this)
     })
   },
   components: {
