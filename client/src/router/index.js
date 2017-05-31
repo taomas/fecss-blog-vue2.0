@@ -13,6 +13,8 @@ import ArticleList from '../components/ArticleList'
 import Article from '../components/Article'
 import TagsList from '../components/TagsList'
 import TagsContent from '../components/TagsContent'
+import AdminArticleList from '../components/AdminArticleList.vue'
+import AdminEditor from '../components/AdminEditor.vue'
 
 const routes = [
   {
@@ -57,9 +59,21 @@ const routes = [
     component: Admin
   },
   {
-    path: '/admin-new',
+    path: '/admin-new/',
     name: 'adminNew',
-    component: AdminNew
+    component: AdminNew,
+    children: [
+      {
+        path: 'list',
+        name: 'adminArticleList',
+        component: AdminArticleList
+      },
+      {
+        path: 'editor',
+        name: 'adminEditor',
+        component: AdminEditor
+      }
+    ]
   },
   {
     path: '/write',
