@@ -9,10 +9,12 @@ const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser')();
 const logger = require('koa-logger');
 const cors = require('kcors');
+const SUCCESS_CODE = 1000000
+const ERROR_CODE = 100010
 
 const articles = require('./routes/articles');
 const users = require('./routes/users');
-const admin = require('./routes/admin');
+const manage = require('./routes/manage');
 
 // middlewares
 app.use(convert(bodyparser));
@@ -42,16 +44,20 @@ app.use(async (ctx, next) => {
 
 router.use('/', articles.routes(), articles.allowedMethods());
 router.use('/users', users.routes(), users.allowedMethods());
-router.use('/admin', admin.routes(), admin.allowedMethods());
+router.use('/manage', manage.routes(), manage.allowedMethods());
 
 app.use(router.routes(), router.allowedMethods());
 // response
 
 app.on('error', function(err, ctx){
+  console.log('==========server error==========')
   console.log(err)
   // logger.error('server error', err, ctx);
   ctx.body = {
-    message: '服务器异常！'
+    data: {},
+    statuscode: ERROR_CODE,
+    message: '服务器异常',
+    exception: err
   }
 });
 

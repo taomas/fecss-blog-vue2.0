@@ -18,11 +18,11 @@ const API_ROOT = 'http://127.0.0.1:3000'
 const apiResource = Vue.resource(API_ROOT + '{/id}{/controller}')
 const articleResource = Vue.resource(API_ROOT + '/articles{/id}{/controller}')
 const usersResource = Vue.resource(API_ROOT + '/users{/id}')
-const adminResource = Vue.resource(API_ROOT + '/admin{/id}')
+const manageResource = Vue.resource(API_ROOT + '/manage{/id}')
 
 export default {
-  getArticleDetail (id) {
-    return articleResource.get({id: id})
+  getArticleDetail (opts) {
+    return articleResource.get({id: opts.id})
   },
   getArticleList (opts) {
     return articleResource.get({id: '', ...opts})
@@ -37,7 +37,7 @@ export default {
     return apiResource.get({id: 'tags', 'controller': tags})
   },
   removeArticleById (opts) {
-    return adminResource.save({id: 'delete'}, opts)
+    return manageResource.save({id: 'delete'}, opts)
   },
   userLogin (opts) {
     return usersResource.save({id: 'login'}, opts)
@@ -45,13 +45,13 @@ export default {
   userRegister (opts) {
     return usersResource.save({id: 'register'}, opts)
   },
-  getAdminArticles (opts) {
-    return adminResource.get({id: '', ...opts})
+  getManageArticles (opts) {
+    return manageResource.get({id: '', ...opts})
   },
   createArticle (opts) {
-    return adminResource.save({id: 'create'}, opts)
+    return manageResource.save({id: 'create'}, opts)
   },
   editArticle (opts) {
-    return adminResource.save({id: 'edit'}, opts)
+    return manageResource.save({id: 'edit'}, opts)
   }
 }

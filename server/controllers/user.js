@@ -73,8 +73,8 @@ const deleteUsers = async (ctx, next) => {
 }
 
 const userAuth = async (ctx, next) => {
-  // 如果不是admin，直接跳过该中间件
-  if (ctx.request.url.indexOf('admin') === -1) {
+  // 如果不是manage，直接跳过该中间件
+  if (ctx.request.url.indexOf('manage') === -1) {
     return await next;
   }
   var token = ctx.request.headers.token || '';

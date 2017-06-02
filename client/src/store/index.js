@@ -14,7 +14,7 @@ let state = {
   errorMessage: '',
   startIndex: 0,
   maxIndex: 0,
-  adminArticles: [],
+  manageArticles: [],
   archiveArticles: [],
   tagsList: [],
   tagsContent: [],
@@ -47,8 +47,8 @@ let mutations = {
   [types.GET_NEW_ARTICLES] (state, articleList) {
     state.newArticles = articleList
   },
-  [types.GET_ADMIN_ARTICLES] (state, adminArticles) {
-    state.adminArticles = adminArticles.articleList
+  [types.GET_ADMIN_ARTICLES] (state, manageArticles) {
+    state.manageArticles = manageArticles.articleList
   },
   [types.UPDATE_EDIT_ARTICLE] (state, editArticle) {
     state.editArticle = editArticle

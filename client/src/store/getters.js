@@ -6,7 +6,7 @@ export const modelMessage = state => state.modelMessage
 export const errorMessage = state => state.errorMessage
 export const startIndex = state => state.startIndex
 export const maxIndex = state => state.maxIndex
-export const adminArticles = state => state.adminArticles
+export const manageArticles = state => state.manageArticles
 export const archiveArticles = state => state.archiveArticles
 export const tagsList = state => state.tagsList
 export const tagsContent = state => state.tagsContent
@@ -17,7 +17,7 @@ export const articleList = (state) => {
   let articleList = state.articleList
   if (articleList.length > 0) {
     articleList.forEach((item) => {
-      item.substrArticle = (item.markedArticle + '').split('</p>')[0].substring(0, 80) + '...</p>'
+      item.substrArticle = (item.render + '').split('</p>')[0].substring(0, 80) + '...</p>'
     })
   }
   return articleList

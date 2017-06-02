@@ -1,28 +1,22 @@
 <template>
-  <div class="admin-container">
+  <div class="manage-container">
     <div class="header ly-row-flex flex-space-between">
       <h1 class="title">后台管理系统</h1>
       <div class="user-wrap ly-row-flex flex-start flex-middle">
         <img class="user-avatar" src="../assets/image/avatar.jpg"></img>
-        <span class="user-name">admin</span>
+        <span class="user-name">manage</span>
       </div>
     </div>
     <div class="main ly-row-flex flex-start">
       <ul class="menu-list ly-col-flex flex-start">
         <li class="menu-item">
-          <router-link :to="{name: 'adminArticleList'}" :class="{'active': routerName === 'adminArticleList'}">
+          <router-link :to="{name: 'manageList'}" :class="{'active': routerName === 'manageList'}">
             <i class="el-icon-document"></i>
             文章
           </router-link>
         </li>
         <li class="menu-item">
-          <router-link :to="{name: 'adminEditor'}" :class="{'active': routerName === '123'}">
-            <i class="el-icon-edit"></i>
-            编辑
-          </router-link>
-        </li>
-        <li class="menu-item">
-          <router-link :to="{name: 'adminEditor'}" :class="{'active': routerName === 'adminEditor'}">
+          <router-link :to="{name: 'manageEditor'}" :class="{'active': routerName === 'manageEditor'}">
             <i class="el-icon-plus"></i>
             创建
           </router-link>
@@ -45,12 +39,6 @@ export default {
     routerName() {
       return this.$route.name
     }
-  },
-  methods: {
-  },
-  components: {
-  },
-  created() {
   }
 }
 </script>
@@ -58,7 +46,7 @@ export default {
 <style lang="postcss">
 @import '../assets/css/index';
 
-.admin-container {
+.manage-container {
   width: 100%;
   height: 100%;
   background: #fff;

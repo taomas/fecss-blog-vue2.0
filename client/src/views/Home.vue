@@ -1,22 +1,22 @@
 <template>
   <div class="home-container ly-row-flex">
-    <AsideLeft></AsideLeft>
+    <Post-Menu></Post-Menu>
     <router-view></router-view>
-    <AsideRight></AsideRight>
+    <Post-Widgets></Post-Widgets>
     <Prograssbar></Prograssbar>
   </div>
 </template>
 
 <script>
-import AsideLeft from '../components/AsideLeft'
-import AsideRight from '../components/AsideRight'
+import Menu from '../components/Menu'
+import Widgets from '../components/Widgets'
 import Prograssbar from '../components/Prograssbar'
 
 export default {
   name: 'home',
   components: {
-    AsideLeft,
-    AsideRight,
+    'Post-Menu': Menu,
+    'Post-Widgets': Widgets,
     Prograssbar
   }
 }

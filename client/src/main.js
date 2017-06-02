@@ -9,21 +9,13 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 import * as filters from './filters/index'
-// import modal from './mixins/modal.js'
 
 Vue.use(ElementUI)
 Vue.use(mavonEditor)
 Vue.config.productionTip = false
 
+console.log(filters)
 Object.keys(filters).forEach(k => Vue.filter(k, filters[k]))
-
-// Vue.mixin({
-//   created: function () {
-//     if (!this.$root.MODAL) {
-//       modal(Vue, this.$root)
-//     }
-//   }
-// })
 
 /* eslint-disable no-new */
 new Vue({

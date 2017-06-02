@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-container">
+  <div class="manage-container">
     <div class="bg-login">
       <img class="bg-login-img" src="../assets/image/loginbg.jpg" alt="" 
         :style="{
@@ -8,33 +8,31 @@
           'margin-top': bgimgConfig.top + 'px',
           'margin-left': bgimgConfig.left + 'px'}"/>
     </div>
-    <section class="admin-form">
-      <h1 class="admin-home-logo ly-row-flex flex-center flex-middle">
+    <section class="manage-form">
+      <h1 class="manage-home-logo ly-row-flex flex-center flex-middle">
         <router-link :to="{name: 'home'}">
           <img class="home-logo-icon" src="../assets/image/avatar.jpg" alt="" />
         </router-link>
       </h1>
-      <div class="admin-login-user">
+      <div class="manage-login-user">
         <label class="login-user-text">用户名</label>
-        <input class="admin-form-user" type="text" value="" placeholder="用户名"
+        <input class="manage-form-user" type="text" value="" placeholder="用户名"
           v-model="username">
       </div>
-      <div class="admin-login-password">
+      <div class="manage-login-password">
         <label class="login-password-text">密码</label>
-        <input class="admin-form-password" type="password" value="" placeholder="密码"
+        <input class="manage-form-password" type="password" value="" placeholder="密码"
           v-model="password">
       </div>
-      <button class="admin-btn-login" type="button"
+      <button class="manage-btn-login" type="button"
         @click="evtUserLogin">用户登陆</button>
-       <!--<button class="admin-btn-register" type="button"
+       <!--<button class="manage-btn-register" type="button"
         @click="evtUserRegister">用户注册</button> -->
     </section>
-    <ModalDialog></ModalDialog>
   </div>
 </template>
 
 <script>
-import ModalDialog from '../components/ModalDialog'
 import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
@@ -55,7 +53,6 @@ export default {
   },
   computed: {
     ...mapGetters({
-      modelMessage: 'modelMessage',
       errorMessage: 'errorMessage'
     })
   },
@@ -94,23 +91,6 @@ export default {
       }
     }
   },
-  watch: {
-    modelMessage (newVal, oldVal) {
-      if (newVal) {
-        this.$Modal.create('提示', newVal, () => {
-          this.$router.go({name: 'admin'})
-        })
-      }
-    },
-    errorMessage (newVal, oldVal) {
-      if (newVal) {
-        this.$Modal.create('提示', newVal)
-      }
-    }
-  },
-  components: {
-    ModalDialog
-  },
   mounted () {
     this.$nextTick(() => {
       this.evtImgAdaptor()
@@ -120,7 +100,7 @@ export default {
 </script>
 
 <style>
-.admin-container {
+.manage-container {
   position: absolute;
   left: 0;
   top: 0;
@@ -142,7 +122,7 @@ export default {
   }
 }
 
-.admin-form {
+.manage-form {
   box-sizing: border-box;
   position: absolute;
   left: 50%;
@@ -152,7 +132,7 @@ export default {
   margin-left: -190px;
   margin-top: -220px;
   padding: 0 60px;
-  .admin-home-logo {
+  .manage-home-logo {
     width: 100%;
     height: 84px;
     text-align: center;
@@ -166,21 +146,21 @@ export default {
       font-size: 24px;
     }
   }
-  .admin-login-user {
+  .manage-login-user {
     width: 100%;
     height: auto;
     .login-user-text {
       color: #fff;
     }
   }
-  .admin-login-password {
+  .manage-login-password {
     width: 100%;
     height: auto;
     .login-password-text {
       color: #fff;
     }
   }
-  .admin-form-user, .admin-form-password {
+  .manage-form-user, .manage-form-password {
     box-sizing: border-box;
     display: block;
     width: 100%;
@@ -191,7 +171,7 @@ export default {
     border-radius: 3px;
     outline: none;
   }
-  .admin-btn-login, .admin-btn-register {
+  .manage-btn-login, .manage-btn-register {
     display: block;
     width: 100%;
     height: 40px;

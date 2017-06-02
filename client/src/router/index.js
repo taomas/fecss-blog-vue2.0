@@ -4,17 +4,15 @@ Vue.use(Router)
 
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
-import Admin from '../views/Admin.vue'
-import AdminNew from '@/views/AdminNew.vue'
-import Write from '../views/Write.vue'
+import Manage from '../views/Manage.vue'
 
 import Archive from '../components/Archive'
 import ArticleList from '../components/ArticleList'
 import Article from '../components/Article'
 import TagsList from '../components/TagsList'
 import TagsContent from '../components/TagsContent'
-import AdminArticleList from '../components/AdminArticleList.vue'
-import AdminEditor from '../components/AdminEditor.vue'
+import ManageList from '../components/ManageList.vue'
+import ManageEditor from '../components/ManageEditor.vue'
 
 const routes = [
   {
@@ -54,31 +52,21 @@ const routes = [
     component: Login
   },
   {
-    path: '/admin',
-    name: 'admin',
-    component: Admin
-  },
-  {
-    path: '/admin-new/',
-    name: 'adminNew',
-    component: AdminNew,
+    path: '/manage/',
+    name: 'manage',
+    component: Manage,
     children: [
       {
         path: 'list',
-        name: 'adminArticleList',
-        component: AdminArticleList
+        name: 'manageList',
+        component: ManageList
       },
       {
         path: 'editor',
-        name: 'adminEditor',
-        component: AdminEditor
+        name: 'manageEditor',
+        component: ManageEditor
       }
     ]
-  },
-  {
-    path: '/write',
-    name: 'write',
-    component: Write
   }
 ]
 

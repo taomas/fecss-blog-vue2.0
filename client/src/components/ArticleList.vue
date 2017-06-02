@@ -14,7 +14,8 @@
               </router-link>
             </h3>
             <span class="article-head-time">{{article.createTime}}</span>
-            <p class="article-content-desc" v-html="article.substrArticle">
+            <p class="article-content-desc">
+              {{article.source | substrArticle}}
             </p>
             <div class="article-content-nav clearfix">
               <div class="article-tags ly-row-flex">
@@ -49,40 +50,52 @@ export default {
   data () {
     return {
       start: 0,
-      limit: 5
+      limit: 5,
+      articleList: []
     }
   },
   computed: {
     ...mapGetters({
-      articleList: 'articleList',
       showLoading: 'showLoading'
     })
   },
   methods: {
-    ...mapActions(['getArticleList']),
-    evtToggleNext () {
+    ...mapActions({
+      xGetArticleList: 'getArticleList'
+    }),
+    evtToggleNext() {
       this.start++
       const opts = {
         start: this.start,
         limit: this.limit
       }
-      this.getArticleList(opts)
+      this.xGetArticleList(opts)
     },
-    evtTogglePre () {
+    evtTogglePre() {
       this.start--
       const opts = {
         start: this.start,
         limit: this.limit
       }
-      this.getArticleList(opts)
+      this.xGetArticleList(opts).then((res) => {
+        this.articleList = res.data
+      }).catch((res) => {
+        this.$message.error(res.message)
+      })
+    },
+    evtGetArticleList() {
+      this.xGetArticleList({
+        start: 0,
+        limit: 5
+      }).then((res) => {
+        this.articleList = res.data
+      }).catch((res) => {
+        this.$message.error(res.message)
+      })
     }
   },
   created () {
-    console.log(123)
-    this.getArticleList({
-      start: 0,
-      limit: 5
-    })
+    this.evtGetArticleList()
   },
   components: {
     'PageNav': PageNav
@@ -101,6 +114,7 @@ export default {
     height: auto;
     background: #fff;
     border-radius: 5px;
+    padding-bottom: 30px;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.02), 0 4px 10px rgba(0, 0, 0, 0.06);
   }
   .adaptor {
@@ -165,7 +179,7 @@ export default {
 
 .article-content-desc {
   width: 100%;
-  margin: 0;
+  margin: 0 0 15px 0;
   color: #7f7f7f;
 }
 

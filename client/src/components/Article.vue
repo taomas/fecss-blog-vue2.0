@@ -2,15 +2,15 @@
   <div class="article-container ly-col-14">
     <article class="article-wrap"
     :class="{'transition-show': loadingStatus === true}">
-      <h1 class="article-head-title">{{articleDetail.title}}</h1>
+      <h1 class="article-head-title">{{article.title}}</h1>
       <ul class="article-nav-list">
         <li class="article-nav-item">
           <i class="icon-calendar ion-clock"></i>
-          {{articleDetail.createTime}}
+          {{article.createTime}}
         </li>
       </ul>
       <p class="article-content markdown-body"
-        v-html="articleDetail.markedArticle">
+        v-html="article.render">
       </p>
     </article>
   </div>
@@ -23,7 +23,8 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      loadingStatus: false
+      loadingStatus: false,
+      article: {}
     }
   },
   computed: {
@@ -55,7 +56,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getArticleDetail']),
+    ...mapActions({
+      xGetArticleDetail: 'getArticleDetail'
+    }),
     toggleScrollTop () {
       // $(window).scrollTop(0)
     },
@@ -72,11 +75,19 @@ export default {
       //   $this.attr('data-language', language)
       // })
       // $('a').attr('target', '_blank')
+    },
+    getArticleDetail() {
+      this.xGetArticleDetail({
+        id: this.articleId
+      }).then((res) => {
+        this.article = res.data
+        console.log(res)
+      })
     }
   },
   created () {
-    this.getArticleDetail(this.articleId)
-    this.toggleScrollTop()
+    this.getArticleDetail()
+    // this.toggleScrollTop()
   }
 }
 </script>
