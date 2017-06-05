@@ -1,3 +1,4 @@
+const _ = require('lodash')
 const Article = require('../models/article')
 const article = new Article()
 const SUCCESS_CODE = 1000000
@@ -6,6 +7,7 @@ const ERROR_CODE = 100010
 const filterArticles = (articles, start, limit) => {
   const startIndex = start * limit,
     endIndex = (start + 1) * limit;
+  console.log(startIndex, endIndex)
   let result = []
   articles.forEach((item, index) => {
     if (index >= startIndex && index < endIndex) {
@@ -22,7 +24,7 @@ const getAllArticles = async(ctx, next) => {
   let articleList = await article.query({})
   if (articleList) {
     articleList = articleList.filter((item, index) => {
-      if (index > start && index < start + limit) {
+      if (index >= start && index <= start + limit) {
         return item
       }
     })
@@ -83,7 +85,8 @@ const editArticle = async(ctx, next) => {
     const articleId = opts.articleId
     const articleDetail = opts.articleDetail
     const data = await article.queryById(articleId).then(function (doc) {
-      Object.assign(doc, articleDetail) // 修改doc
+      _.assignIn(doc, articleDetail)
+      console.log(doc)
       return doc.save()
     })
 
