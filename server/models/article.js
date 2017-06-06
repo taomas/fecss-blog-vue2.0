@@ -5,7 +5,7 @@ class Article {
     this.model = ArticleModel
   }
   save (opts) {
-    // opts.createTime = new Date().toLocaleString().split(' ')[0]
+    opts.createTime = new Date().toLocaleString().split(' ')[0]
     this.entity = new ArticleModel(opts)
     return this.entity.save(opts)
   }

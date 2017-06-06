@@ -9,6 +9,7 @@ Vue.http.interceptors.push((request, next) => {
   Vue.http.headers.common['token'] = token
   next((response) => {
     if (response.body.statuscode === 100011) {
+      cookie.remove('token')
       window.location.hash = '#/login'
     }
   })

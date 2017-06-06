@@ -1,9 +1,7 @@
 <template>
   <div class="tags-container ly-col-14">
     <h1 class="tags-head-title">标签</h1>
-    <div class="tags-wrap"
-      transition="fadeIn"
-      v-show="showLoading === false">
+    <div class="tags-wrap">
       <h2 class="tags-title">目前共计{{tagsList.length}}个标签</h2>
       <div class="tags">
         <ul class="tags-list ly-row-flex">
@@ -20,19 +18,23 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
-  computed: {
-    ...mapGetters({
-      tagsList: 'tagsList',
-      showLoading: 'showLoading'
-    })
+  data() {
+    return {
+      tagsList: []
+    }
   },
   methods: {
-    ...mapActions(['getTagsList'])
+    ...mapActions(['getTagsList']),
+    evtGetTagsList() {
+      this.getTagsList().then((res) => {
+        this.tagsList = res.data.list
+      })
+    }
   },
   created () {
-    this.getTagsList()
+    this.evtGetTagsList()
   }
 }
 </script>

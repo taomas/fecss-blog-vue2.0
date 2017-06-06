@@ -21,22 +21,20 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
+      newArticles: []
     }
-  },
-  computed: {
-    ...mapGetters({
-      newArticles: 'newArticles'
-    })
   },
   methods: {
     ...mapActions(['getNewArticles'])
   },
   created () {
-    this.getNewArticles()
+    this.getNewArticles().then((res) => {
+      this.newArticles = res.data.list
+    })
   }
 }
 </script>

@@ -76,7 +76,7 @@ export default {
     },
     getManageArticles() {
       this.xGetManageArticles().then((res) => {
-        this.articleList = res.data
+        this.articleList = res.data.list
       }).catch((res) => {
         this.$message({
           message: res.message,

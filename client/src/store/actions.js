@@ -25,20 +25,32 @@ export const getArticleList = (ctx, opts) => {
 }
 
 export const getArchiveArticles = (ctx) => {
-  api.getArchiveArticles().then(function(res) {
-    ctx.commit(types.GET_ARCHIVE_ARTICLES, res.body.articles)
+  return api.getArchiveArticles().then(function(res) {
+    if (res.body.statuscode === SUCCESS_CODE) {
+      return Promise.resolve(res.body)
+    } else {
+      return Promise.reject(res.body)
+    }
   })
 }
 
 export const getTagsList = (ctx) => {
-  api.getTagsList().then(function(res) {
-    ctx.commit(types.GET_TAGS_LIST, res.body.tagsList)
+  return api.getTagsList().then(function(res) {
+    if (res.body.statuscode === SUCCESS_CODE) {
+      return Promise.resolve(res.body)
+    } else {
+      return Promise.reject(res.body)
+    }
   })
 }
 
 export const getTagsContent = (ctx, tags) => {
-  api.getTagsContent(tags).then(function(res) {
-    ctx.commit(types.GET_TAGS_CONTENT, res.body.tagsContent)
+  return api.getTagsContent(tags).then(function(res) {
+    if (res.body.statuscode === SUCCESS_CODE) {
+      return Promise.resolve(res.body)
+    } else {
+      return Promise.reject(res.body)
+    }
   })
 }
 
@@ -53,11 +65,15 @@ export const getManageArticles = (ctx, opts) => {
 }
 
 export const getNewArticles = (ctx) => {
-  api.getArticleList({
+  return api.getArticleList({
     start: 0,
     limit: 5
   }).then(function(res) {
-    ctx.commit(types.GET_NEW_ARTICLES, res.body.articleList)
+    if (res.body.statuscode === SUCCESS_CODE) {
+      return Promise.resolve(res.body)
+    } else {
+      return Promise.reject(res.body)
+    }
   })
 }
 

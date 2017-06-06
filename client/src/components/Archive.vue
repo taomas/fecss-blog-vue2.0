@@ -1,36 +1,34 @@
 <template>
   <div class="archive-container ly-col-14">
     <h1 class="archive-head-title">分类</h1>
-    <transition name="fadeIn"
-      v-show="showLoading === false">
-      <section class="archive-wrap">
-        <div class="archive">
-          <template v-for="(value, key) in archives">
-            <h2 class="archive-year">{{key}}</h2>
-            <ul class="archive-list">
-              <li class="archive-item" v-for="item in value">
-                <span class="post-time">{{item.createTime}}</span>
-                <router-link class="post-title-link"
-                  :to="{name: 'page', params: {id: item._id}}">
-                    {{item.title}}
-                  </router-link>
-              </li>
-            </ul>
-          </template>
-        </div>
-      </section>
-    </transition>
+    <section class="archive-wrap">
+      <div class="archive">
+        <template v-for="(value, key) in archives">
+          <h2 class="archive-year">{{key}}</h2>
+          <ul class="archive-list">
+            <li class="archive-item" v-for="item in value">
+              <span class="post-time">{{item.createTime}}</span>
+              <router-link class="post-title-link"
+                :to="{name: 'article', params: {id: item.id}}">
+                  {{item.title}}
+                </router-link>
+            </li>
+          </ul>
+        </template>
+      </div>
+    </section>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
+  data() {
+    return {
+      archiveArticles: []
+    }
+  },
   computed: {
-    ...mapGetters({
-      archiveArticles: 'archiveArticles',
-      showLoading: 'showLoading'
-    }),
     archives () {
       let archiveArticles = this.archiveArticles
       let ans = {}
@@ -46,10 +44,14 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getArchiveArticles'])
+    ...mapActions({
+      xGetArchiveArticles: 'getArchiveArticles'
+    })
   },
   created () {
-    this.getArchiveArticles()
+    this.xGetArchiveArticles().then((res) => {
+      this.archiveArticles = res.data.list
+    })
   }
 }
 </script>

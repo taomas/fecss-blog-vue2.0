@@ -1,9 +1,7 @@
 <template>
   <div class="tags-container ly-col-14">
     <h1 class="tags-head-title">标签</h1>
-    <div class="tags-wrap"
-      transition="fadeIn"
-      v-show="showLoading === false">
+    <div class="tags-wrap">
       <section class="tags">
         <h2 class="tags-year">{{tags}}</h2>
         <ul class="tags-list">
@@ -22,27 +20,36 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   name: 'tagsContent',
+  data() {
+    return {
+      tagsContent: []
+    }
+  },
   computed: {
-    ...mapGetters({
-      tagsContent: 'tagsContent',
-      showLoading: 'showLoading'
-    }),
-    tags () {
+    tags() {
       if (this.tagsContent[0]) {
         return this.tagsContent[0].tags
       }
       return ''
+    },
+    id() {
+      return this.$route.params.id
     }
   },
   methods: {
-    ...mapActions(['getTagsContent'])
+    ...mapActions(['getTagsContent']),
+    evtGetTagsContent() {
+      this.getTagsContent(this.id).then((res) => {
+        console.log(res)
+        this.tagsContent = res.data.content
+      })
+    }
   },
   created () {
-    const tags = this.$route.params.id
-    this.getTagsContent(tags)
+    this.evtGetTagsContent()
   }
 }
 </script>

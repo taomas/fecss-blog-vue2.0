@@ -5,6 +5,7 @@ const articleSchema = new mongoose.Schema({
   tags: String,
   source: String,
   render: String,
+  createTime: String,
   date: { type: Date, default: Date.now }
 })
 

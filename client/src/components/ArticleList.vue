@@ -14,7 +14,7 @@
               </router-link>
             </h3>
             <span class="article-head-time">{{article.createTime}}</span>
-            <p class="article-content-desc markdown-body" v-html="substringRender(article.source)">
+            <p class="article-content-desc markdown-body" v-html="substringRender(article.render)">
             </p>
             <div class="article-content-nav clearfix">
               <div class="article-tags ly-row-flex">
@@ -80,7 +80,7 @@ export default {
         limit: this.limit
       }
       this.xGetArticleList(opts).then((res) => {
-        this.articleList = res.data
+        this.articleList = res.data.list
       }).catch((res) => {
         this.$message.error(res.message)
       })
@@ -90,7 +90,7 @@ export default {
         start: 0,
         limit: 5
       }).then((res) => {
-        this.articleList = res.data
+        this.articleList = res.data.list
       }).catch((res) => {
         this.$message.error(res.message)
       })

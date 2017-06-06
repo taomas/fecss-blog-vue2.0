@@ -16,7 +16,9 @@ const getAllArticles = async(ctx, next) => {
   let articleList = await article.query({})
   if (articleList) {
     ctx.body = {
-      data: articleList.slice(start, start + limit),
+      data: {
+        list: articleList.slice(start, start + limit)
+      },
       statuscode: config.SUCCESS_CODE,
       message: config.REQUEST_SUCCESS
     }
@@ -35,7 +37,9 @@ const getArticleById = async(ctx, next) => {
   const articleDetail = await article.queryById(articleId)
   if (articleDetail) {
     ctx.body = {
-      data: articleDetail,
+      data: {
+        detail: articleDetail
+      },
       statuscode: config.SUCCESS_CODE,
       message: config.REQUEST_SUCCESS
     }
@@ -64,7 +68,7 @@ const createArticle = async(ctx, next) => {
     const data = await article.save(opts)
     if (data) {
       result = {
-        data: data,
+        data: {},
         statuscode: config.SUCCESS_CODE,
         message: '文章创建成功'
       }
@@ -79,13 +83,11 @@ const editArticle = async(ctx, next) => {
     const articleDetail = opts.articleDetail
     const data = await article.queryById(articleId).then(function (doc) {
       _.assignIn(doc, articleDetail)
-      console.log(doc)
       return doc.save()
     })
-
     if (data) {
       ctx.body = {
-        data: data,
+        data: {},
         statuscode: config.SUCCESS_CODE,
         message: '文章更新成功'
       }
@@ -97,7 +99,7 @@ const deleteArticle = async(ctx, next) => {
   const data = await article.remove(id)
   if (data) {
     ctx.body = {
-      data: data,
+      data: {},
       statuscode: config.SUCCESS_CODE,
       message: '文章删除成功'
     }
@@ -108,16 +110,20 @@ const getArchiveList = async(ctx, next) => {
   let articleList = await article.query({})
   if (articleList) {
     articleList = articleList.map((item) => {
+      console.log(item)
       let newEle = {
-        _id: item._id,
+        id: item._id,
         createTime: item.createTime,
         title: item.title
       }
       return newEle
     })
     ctx.body = {
-      success: true,
-      articles: articleList
+      data: {
+        list: articleList
+      },
+      statuscode: config.SUCCESS_CODE,
+      message: '获取分类成功'
     }
   }
 }
@@ -125,7 +131,6 @@ const getArchiveList = async(ctx, next) => {
 const getTagsList = async(ctx, next) => {
   let tagsList = []
   let articleList = await article.query({})
-  
   if (articleList) {
     articleList.forEach((item) => {
       if (!tagsList.includes(item.tags)) {
@@ -133,8 +138,11 @@ const getTagsList = async(ctx, next) => {
       }
     })
     ctx.body = {
-      success: true,
-      tagsList: tagsList
+      data: {
+        list: tagsList
+      },
+      statuscode: config.SUCCESS_CODE,
+      message: '文章删除成功'
     }
   }
 }
@@ -145,12 +153,14 @@ const getTagsContent = async(ctx, next) => {
   const tagsContent = await article.query({
     tags: tags
   })
-
   if (tagsContent) {
     ctx.body = {
-      success: true,
-      tags: tags,
-      tagsContent: tagsContent
+      data: {
+        list: tags,
+        content: tagsContent
+      },
+      statuscode: config.SUCCESS_CODE,
+      message: '文章删除成功'
     }
   }
 }

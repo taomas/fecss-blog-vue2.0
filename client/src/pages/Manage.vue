@@ -3,7 +3,9 @@
     <div class="header ly-row-flex flex-space-between">
       <h1 class="title">后台管理系统</h1>
       <div class="user-wrap ly-row-flex flex-start flex-middle">
-        <img class="user-avatar" src="../assets/image/avatar.jpg"></img>
+        <router-link :to="{name: 'home'}">
+          <img class="user-avatar" src="../assets/image/avatar.jpg"></img>
+        </router-link>
         <span class="user-name">manage</span>
       </div>
     </div>

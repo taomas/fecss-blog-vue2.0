@@ -8,16 +8,13 @@
             文刀三授
           </a>
         </h3>
-        <span class="aside-head-subtitle">前端小菜鸟</span>
+        <span class="aside-head-subtitle">一位有理想的程序员</span>
       </div>
       <ul class="aside-menu-list">
         <li class="aside-menu-item"
-          v-for="item in menus">
-          <router-link
-            class="aside-menu-link"
-            :to="{name: item.sourceLink}">
+          v-for="item in menus"
+          @click="evtToogleMenu(item)">
             {{item.name}}
-          </router-link>
         </li>
       </ul>
     </div>
@@ -25,15 +22,26 @@
 </template>
 
 <script>
+import cookie from 'js-cookie'
 export default {
   data () {
     return {
       menus: [
-        {name: '文章', sourceLink: 'home'},
-        {name: '分类', sourceLink: 'archive'},
-        {name: '标签', sourceLink: 'tags'},
-        {name: '站长登陆', sourceLink: 'login'}
+        {name: '文章', pathname: 'home'},
+        {name: '分类', pathname: 'archive'},
+        {name: '标签', pathname: 'tags'},
+        {name: '站长登陆', pathname: 'login'}
       ]
+    }
+  },
+  methods: {
+    evtToogleMenu(item) {
+      const token = cookie.get('token') || ''
+      if (token && item.pathname === 'login') {
+        this.$router.push({name: 'manageList'})
+      } else {
+        this.$router.push({name: item.pathname})
+      }
     }
   }
 }
@@ -121,6 +129,7 @@ export default {
     }
     &:hover {
       background: #42b983;
+      color: #f5f5f5;
       .aside-menu-link {
         color: #f5f5f5;
       }

@@ -18,8 +18,9 @@
       </div>
       <button class="login-btn-login" type="button"
         @click="evtUserLogin">用户登陆</button>
+        <!--
        <button class="login-btn-register" type="button"
-        @click="evtUserRegister">用户注册</button>
+        @click="evtUserRegister">用户注册</button>-->
     </section>
   </div>
 </template>
@@ -61,8 +62,8 @@ export default {
           type: 'success'
         })
         window.setTimeout(() => {
-          this.$router.push({name: 'namageList'})
-        }, 2000)
+          this.$router.push({name: 'manageList'})
+        }, 300)
       }).catch((res) => {
         this.$message({
           message: res.message,
@@ -94,10 +95,7 @@ export default {
       })
     }
   },
-  mounted () {
-    this.$nextTick(() => {
-      // this.evtImgAdaptor()
-    })
+  created () {
   }
 }
 </script>
