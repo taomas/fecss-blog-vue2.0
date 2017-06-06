@@ -2,9 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 Vue.use(Router)
 
-import Home from '../views/Home.vue'
-import Login from '../views/Login.vue'
-import Manage from '../views/Manage.vue'
+import Home from '../pages/Home.vue'
+import Login from '../pages/Login.vue'
+import Manage from '../pages/Manage.vue'
 
 import Archive from '../components/Archive'
 import ArticleList from '../components/ArticleList'

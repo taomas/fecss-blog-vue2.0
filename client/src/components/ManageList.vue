@@ -78,9 +78,9 @@ export default {
       this.xGetManageArticles().then((res) => {
         this.articleList = res.data
       }).catch((res) => {
-        this.$notify.info({
-          title: '提示',
-          message: res.message
+        this.$message({
+          message: res.message,
+          type: 'warning'
         })
       })
     },

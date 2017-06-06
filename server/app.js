@@ -13,6 +13,7 @@ const ERROR_CODE = 100010
 const articles = require('./routes/articles');
 const users = require('./routes/users');
 const manage = require('./routes/manage');
+const userAuth = require('./controllers/user').userAuth
 
 // middlewares
 app.use(convert(bodyparser));
@@ -36,6 +37,7 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`);
 });
 
+app.use(userAuth)
 router.use('/', articles.routes(), articles.allowedMethods());
 router.use('/users', users.routes(), users.allowedMethods());
 router.use('/manage', manage.routes(), manage.allowedMethods());

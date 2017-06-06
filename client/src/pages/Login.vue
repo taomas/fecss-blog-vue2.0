@@ -1,86 +1,97 @@
 <template>
-  <div class="manage-container">
-    <section class="manage-form">
-      <h1 class="manage-home-logo ly-row-flex flex-center flex-middle">
+  <div class="login-container">
+    <section class="login-form">
+      <div class="login-home-logo ly-row-flex flex-center flex-middle">
         <router-link :to="{name: 'home'}">
           <img class="home-logo-icon" src="../assets/image/avatar.jpg" alt="" />
         </router-link>
-      </h1>
-      <div class="manage-login-user">
+      </div>
+      <div class="login-user">
         <label class="login-user-text">用户名</label>
-        <input class="manage-form-user" type="text" value="" placeholder="用户名"
+        <input class="login-form-user" type="text" value="" placeholder="用户名"
           v-model="username">
       </div>
-      <div class="manage-login-password">
+      <div class="login-login-password">
         <label class="login-password-text">密码</label>
-        <input class="manage-form-password" type="password" value="" placeholder="密码"
+        <input class="login-form-password" type="password" value="" placeholder="密码"
           v-model="password">
       </div>
-      <button class="manage-btn-login" type="button"
+      <button class="login-btn-login" type="button"
         @click="evtUserLogin">用户登陆</button>
-       <!--<button class="manage-btn-register" type="button"
-        @click="evtUserRegister">用户注册</button> -->
+       <button class="login-btn-register" type="button"
+        @click="evtUserRegister">用户注册</button>
     </section>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
   data () {
     return {
       username: '',
-      password: '',
-      modelContent: '',
-      showModel: false,
-      clientwidth: document.documentElement.clientWidth,
-      clientheight: document.documentElement.clientHeight,
-      bgimgConfig: {
-        width: '',
-        height: '',
-        left: '',
-        top: ''
-      }
+      password: ''
     }
-  },
-  computed: {
-    ...mapGetters({
-      errorMessage: 'errorMessage'
-    })
   },
   methods: {
     ...mapActions(['userRegister', 'userLogin']),
+    verifyLoginOpts() {
+      if (this.username.length === 0) {
+        return '用户名不能为空'
+      }
+      if (this.password.length === 0) {
+        return '密码不能为空'
+      }
+      return ''
+    },
     evtUserLogin () {
-      var opts = {
+      const message = this.verifyLoginOpts()
+      if (message) {
+        return this.$message({
+          message: message,
+          type: 'warning'
+        })
+      }
+      this.userLogin({
         username: this.username,
         password: this.password
-      }
-      this.userLogin(opts)
+      }).then((res) => {
+        this.$message({
+          message: res.message,
+          type: 'success'
+        })
+        window.setTimeout(() => {
+          this.$router.push({name: 'namageList'})
+        }, 2000)
+      }).catch((res) => {
+        this.$message({
+          message: res.message,
+          type: 'warning'
+        })
+      })
     },
     evtUserRegister () {
-      var opts = {
+      const message = this.verifyLoginOpts()
+      if (message) {
+        return this.$message({
+          message: message,
+          type: 'warning'
+        })
+      }
+      this.userRegister({
         username: this.username,
         password: this.password
-      }
-      this.userRegister(opts)
-    },
-    evtImgAdaptor () {
-      this.toogleAdaptor()
-      window.onresize = this.toogleAdaptor
-    },
-    toogleAdaptor () {
-      let clientwidth = document.documentElement.clientWidth
-      let clientheight = document.documentElement.clientHeight
-      if (clientwidth > 1422) {
-        this.bgimgConfig.width = clientwidth
-      } else {
-        this.bgimgConfig.left = (clientwidth - 1422) / 2
-      }
-      if (clientheight > 800) {
-        this.bgimgConfig.height = clientheight
-      } else {
-        this.bgimgConfig.top = (clientheight - 800) / 2
-      }
+      }).then((res) => {
+        this.$message({
+          message: res.message,
+          type: 'success'
+        })
+      }).catch((res) => {
+        this.$message({
+          message: res.message,
+          type: 'warning'
+        })
+      })
     }
   },
   mounted () {
@@ -92,7 +103,7 @@ export default {
 </script>
 
 <style lang="postcss">
-.manage-container {
+.login-container {
   position: absolute;
   left: 0;
   top: 0;
@@ -101,7 +112,7 @@ export default {
   background: #389daa;
 }
 
-.manage-form {
+.login-form {
   box-sizing: border-box;
   position: absolute;
   left: 50%;
@@ -112,9 +123,9 @@ export default {
   padding: 30px;
   border-radius: 10px;
   background: #fff;
-  .manage-home-logo {
+  .login-home-logo {
     width: 100%;
-    height: 84px;
+    height: auto;
     margin: 0;
     text-align: center;
     .home-logo-icon {
@@ -127,7 +138,7 @@ export default {
       font-size: 24px;
     }
   }
-  .manage-login-user {
+  .login-user {
     width: 100%;
     height: auto;
     .login-user-text {
@@ -136,7 +147,7 @@ export default {
       margin-bottom: 10px;
     }
   }
-  .manage-login-password {
+  .login-login-password {
     width: 100%;
     height: auto;
     .login-password-text {
@@ -145,7 +156,7 @@ export default {
       margin-bottom: 10px;
     }
   }
-  .manage-form-user, .manage-form-password {
+  .login-form-user, .login-form-password {
     box-sizing: border-box;
     display: block;
     width: 100%;
@@ -156,7 +167,7 @@ export default {
     border-radius: 3px;
     outline: none;
   }
-  .manage-btn-login, .manage-btn-register {
+  .login-btn-login, .login-btn-register {
     display: block;
     width: 100%;
     height: 40px;

@@ -1,7 +1,7 @@
 const User = require('../models/user')
 const user = new User()
-
 const jwt = require('koa-jwt')
+import { SUCCESS_CODE, ERROR_CODE, TOKEN_ERROR_CODE } from '../config/config.js'
 
 const login = async (ctx, next) => {
   const opts = ctx.request.body;
@@ -11,18 +11,21 @@ const login = async (ctx, next) => {
   }), 'shared-secret');
   const result = await user.query(opts)
   const loginUser = result.length ? result[0] : ''
+  console.log(result, loginUser)
   if (loginUser) {
     ctx.body = {
-      success: true,
-      message: '用户登陆成功',
-      user: loginUser,
-      token: token
+      data: {
+        user: loginUser,
+        token: token
+      },
+      statuscode: SUCCESS_CODE,
+      message: '登录成功'
     }
   } else {
     ctx.body = {
-      success: false,
-      message: '用户名或密码错误',
-      user: loginUser
+      data: {},
+      statuscode: ERROR_CODE,
+      message: '用户名或密码错误'
     }
   }
 }
@@ -34,18 +37,22 @@ const register = async (ctx, next) => {
   })
   if (result.length > 0) {
     ctx.body = {
-      success: false,
-      message: '该账户已存在！',
-      result: result
+      data: {
+        user: result,
+        token: token
+      },
+      statuscode: ERROR_CODE,
+      message: '该账户已存在！'
     }
   } else {
     result = await user.save(opts)
-    if (result) {
-      ctx.body = {
-        success: true,
-        message: '注册成功',
-        result: result
-      }
+    ctx.body = {
+      data: {
+        user: result,
+        token: token
+      },
+      statuscode: SUCCESS_CODE,
+      message: '注册成功'
     }
   }
 }
@@ -54,9 +61,11 @@ const queryUsers = async (ctx, next) => {
   const result = await user.queryAll()
   if (result) {
     ctx.body = {
-      success: true,
-      message: '查询账户成功',
-      result: result
+      data: {
+        result: result
+      },
+      statuscode: SUCCESS_CODE,
+      message: '查询账户成功'
     }
   }
 }
@@ -65,9 +74,11 @@ const deleteUsers = async (ctx, next) => {
   const result = user.removeAll()
   if (result) {
     ctx.body = {
-      success: true,
-      message: '删除所有账户成功',
-      result: result
+      data: {
+        result: result
+      },
+      statuscode: SUCCESS_CODE,
+      message: '删除所有账户成功'
     }
   }
 }
@@ -75,34 +86,31 @@ const deleteUsers = async (ctx, next) => {
 const userAuth = async (ctx, next) => {
   // 如果不是manage，直接跳过该中间件
   if (ctx.request.url.indexOf('manage') === -1) {
-    return await next;
+    return await next();
   }
-  var token = ctx.request.headers.token || '';
+  const token = ctx.request.headers.token || '';
   if (token) {
-    var profile = jwt.verify(token, 'shared-secret');
+    const profile = jwt.verify(token, 'shared-secret');
     if (profile) {
       // 设置过期时间为7天
       if (Date.now() - profile.original_iat  < 7 * 24 * 60 * 60 * 1000) {
         ctx.user_token = profile;
-        await next;
+        await next();
       } else {
-        ctx.status = 401;
         ctx.body = {
-          success: false,
+          statuscode: TOKEN_ERROR_CODE,
           message: 'token已过期'
         };
       }
     } else {
-      ctx.status = 401;
       ctx.body = {
-        success: false,
+        statuscode: TOKEN_ERROR_CODE,
         message: 'token认证失败'
       }
     }
   } else {
-    ctx.status = 401;
     ctx.body = {
-      success: false,
+      statuscode: TOKEN_ERROR_CODE,
       message: 'token认证失败'
     }
   }

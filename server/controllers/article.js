@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { SUCCESS_CODE, ERROR_CODE } from '../config/config.js'
+import * as config from '../config/config.js'
 import Article from '../models/article'
 const article = new Article()
 
@@ -17,14 +17,14 @@ const getAllArticles = async(ctx, next) => {
   if (articleList) {
     ctx.body = {
       data: articleList.slice(start, start + limit),
-      statuscode: SUCCESS_CODE,
-      message: '请求成功'
+      statuscode: config.SUCCESS_CODE,
+      message: config.REQUEST_SUCCESS
     }
   } else {
     ctx.body = {
       data: {},
-      statuscode: errormsg,
-      message: '请求失败'
+      statuscode: config.ERROR_CODE,
+      message: config.REQUEST_FAIL
     }
   }
 }
@@ -36,8 +36,8 @@ const getArticleById = async(ctx, next) => {
   if (articleDetail) {
     ctx.body = {
       data: articleDetail,
-      statuscode: SUCCESS_CODE,
-      message: '请求成功'
+      statuscode: config.SUCCESS_CODE,
+      message: config.REQUEST_SUCCESS
     }
   }
 }
@@ -57,7 +57,7 @@ const createArticle = async(ctx, next) => {
   if (errormsg) {
     result = {
       data: {},
-      statuscode: ERROR_CODE,
+      statuscode: config.ERROR_CODE,
       message: errormsg
     }
   } else {
@@ -65,7 +65,7 @@ const createArticle = async(ctx, next) => {
     if (data) {
       result = {
         data: data,
-        statuscode: SUCCESS_CODE,
+        statuscode: config.SUCCESS_CODE,
         message: '文章创建成功'
       }
     }
@@ -86,7 +86,7 @@ const editArticle = async(ctx, next) => {
     if (data) {
       ctx.body = {
         data: data,
-        statuscode: SUCCESS_CODE,
+        statuscode: config.SUCCESS_CODE,
         message: '文章更新成功'
       }
     }
@@ -98,7 +98,7 @@ const deleteArticle = async(ctx, next) => {
   if (data) {
     ctx.body = {
       data: data,
-      statuscode: SUCCESS_CODE,
+      statuscode: config.SUCCESS_CODE,
       message: '文章删除成功'
     }
   }

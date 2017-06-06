@@ -1,15 +1,15 @@
 import Vue from 'vue'
 import VueResource from 'vue-resource'
-import store from '../store/index'
+import cookie from 'js-cookie'
 
 Vue.use(VueResource)
 
 Vue.http.interceptors.push((request, next) => {
-  store.commit('TOOGLE_LOADING', true)
+  const token = cookie.get('token') || ''
+  Vue.http.headers.common['token'] = token
   next((response) => {
-    store.commit('TOOGLE_LOADING', false)
-    if (response.status === 401) {
-      window.location.hash = '#!/login'
+    if (response.body.statuscode === 100011) {
+      window.location.hash = '#/login'
     }
   })
 })

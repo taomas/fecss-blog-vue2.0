@@ -91,22 +91,14 @@ export const removeArticleById = (ctx, opts) => {
   })
 }
 
-export const destroyModelMessage = (ctx) => {
-  ctx.commit(types.SHOW_SUCCESS_MESSAGE, '')
-  ctx.commit(types.SHOW_ERROR_MESSAGE, '')
-}
-
-export const showErrorMessage = (ctx, message) => {
-  ctx.commit(types.SHOW_ERROR_MESSAGE, message)
-}
-
 export const userLogin = (ctx, opts) => {
   return api.userLogin(opts).then(function(res) {
-    if (res.body.success) {
-      cookies.set('token', res.body.token, { expires: 7 })
-      ctx.commit(types.SHOW_SUCCESS_MESSAGE, res.body.message)
+    if (res.body.statuscode === SUCCESS_CODE) {
+      let data = res.body.data
+      cookies.set('token', data.token, { expires: 7 })
+      return Promise.resolve(res.body)
     } else {
-      ctx.commit(types.SHOW_ERROR_MESSAGE, res.body.message)
+      return Promise.reject(res.body)
     }
   })
 }
