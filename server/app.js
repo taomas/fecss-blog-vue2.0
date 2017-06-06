@@ -1,8 +1,6 @@
 const Koa = require('koa');
 const app = new Koa();
 const router = require('koa-router')();
-const views = require('koa-views');
-const co = require('co');
 const convert = require('koa-convert');
 const json = require('koa-json');
 const onerror = require('koa-onerror');
@@ -21,11 +19,7 @@ app.use(convert(bodyparser));
 app.use(convert(json()));
 app.use(convert(logger()));
 app.use(require('koa-static')(__dirname + '/public'));
-app.use(cors());
-
-app.use(views(__dirname + '/views', {
-  extension: 'jade'
-}));
+app.use(cors())
 
 const db = require('./config/mongoose')();
 db.on('error', console.error.bind(console, 'error: connect error!'))
@@ -49,17 +43,22 @@ router.use('/manage', manage.routes(), manage.allowedMethods());
 app.use(router.routes(), router.allowedMethods());
 // response
 
-app.on('error', function(err, ctx){
-  console.log('==========server error==========')
-  console.log(err)
-  // logger.error('server error', err, ctx);
-  ctx.body = {
-    data: {},
-    statuscode: ERROR_CODE,
-    message: '服务器异常',
-    exception: err
-  }
-});
+onerror(app)
+app.use(function*(){
+  this.body = fs.createReadStream('not exist');
+})
+
+// app.on('error', function(err, ctx){
+//   console.log('==========server error==========')
+//   console.log(err)
+//   // logger.error('server error', err, ctx);
+//   ctx.body = {
+//     data: {},
+//     statuscode: ERROR_CODE,
+//     message: '服务器异常',
+//     exception: err
+//   }
+// });
 
 
 module.exports = app;

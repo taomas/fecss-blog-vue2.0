@@ -1,13 +1,5 @@
 <template>
   <div class="manage-container">
-    <div class="bg-login">
-      <img class="bg-login-img" src="../assets/image/loginbg.jpg" alt="" 
-        :style="{
-          width: bgimgConfig.width + 'px',
-          height: bgimgConfig.height + 'px',
-          'margin-top': bgimgConfig.top + 'px',
-          'margin-left': bgimgConfig.left + 'px'}"/>
-    </div>
     <section class="manage-form">
       <h1 class="manage-home-logo ly-row-flex flex-center flex-middle">
         <router-link :to="{name: 'home'}">
@@ -93,33 +85,20 @@ export default {
   },
   mounted () {
     this.$nextTick(() => {
-      this.evtImgAdaptor()
+      // this.evtImgAdaptor()
     })
   }
 }
 </script>
 
-<style>
+<style lang="postcss">
 .manage-container {
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-}
-
-.bg-login {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  overflow: hidden;
-  .bg-login-img {
-    display: block;
-    opacity: 1;
-  }
+  background: #389daa;
 }
 
 .manage-form {
@@ -127,14 +106,16 @@ export default {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 350px;
-  height: 440px;
-  margin-left: -190px;
-  margin-top: -220px;
-  padding: 0 60px;
+  width: 300px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  border-radius: 10px;
+  background: #fff;
   .manage-home-logo {
     width: 100%;
     height: 84px;
+    margin: 0;
     text-align: center;
     .home-logo-icon {
       width: 64px;
@@ -150,14 +131,18 @@ export default {
     width: 100%;
     height: auto;
     .login-user-text {
-      color: #fff;
+      display: block;
+      color: #ccc;
+      margin-bottom: 10px;
     }
   }
   .manage-login-password {
     width: 100%;
     height: auto;
     .login-password-text {
-      color: #fff;
+      display: block;
+      color: #ccc;
+      margin-bottom: 10px;
     }
   }
   .manage-form-user, .manage-form-password {
@@ -176,11 +161,11 @@ export default {
     width: 100%;
     height: 40px;
     color: #fff;
-    margin-bottom: 20px;
     border: 0;
     background: #eb7372;
     border-radius: 5px;
     outline: none;
+    cursor: pointer;
   }
 }
 </style>

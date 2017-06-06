@@ -14,8 +14,7 @@
               </router-link>
             </h3>
             <span class="article-head-time">{{article.createTime}}</span>
-            <p class="article-content-desc">
-              {{article.source | substrArticle}}
+            <p class="article-content-desc markdown-body" v-html="substringRender(article.source)">
             </p>
             <div class="article-content-nav clearfix">
               <div class="article-tags ly-row-flex">
@@ -63,6 +62,9 @@ export default {
     ...mapActions({
       xGetArticleList: 'getArticleList'
     }),
+    substringRender(render) {
+      return render.substr(0, 150)
+    },
     evtToggleNext() {
       this.start++
       const opts = {

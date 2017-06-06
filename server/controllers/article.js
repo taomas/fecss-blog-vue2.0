@@ -1,20 +1,12 @@
-const _ = require('lodash')
-const Article = require('../models/article')
+import _ from 'lodash'
+import { SUCCESS_CODE, ERROR_CODE } from '../config/config.js'
+import Article from '../models/article'
 const article = new Article()
-const SUCCESS_CODE = 1000000
-const ERROR_CODE = 100010
 
 const filterArticles = (articles, start, limit) => {
   const startIndex = start * limit,
     endIndex = (start + 1) * limit;
-  console.log(startIndex, endIndex)
-  let result = []
-  articles.forEach((item, index) => {
-    if (index >= startIndex && index < endIndex) {
-      result.push(item)
-    }
-  })
-  return result
+  return articles.slice(startIndex, endIndex)
 }
 
 const getAllArticles = async(ctx, next) => {
@@ -23,15 +15,16 @@ const getAllArticles = async(ctx, next) => {
   const start = query.start || 0
   let articleList = await article.query({})
   if (articleList) {
-    articleList = articleList.filter((item, index) => {
-      if (index >= start && index <= start + limit) {
-        return item
-      }
-    })
     ctx.body = {
-      data: articleList,
+      data: articleList.slice(start, start + limit),
       statuscode: SUCCESS_CODE,
       message: '请求成功'
+    }
+  } else {
+    ctx.body = {
+      data: {},
+      statuscode: errormsg,
+      message: '请求失败'
     }
   }
 }

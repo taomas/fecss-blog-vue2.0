@@ -1,11 +1,11 @@
-const ArticleModel = require('../schema/article')
+import ArticleModel from '../schema/article'
 
 class Article {
   constructor () {
     this.model = ArticleModel
   }
   save (opts) {
-    opts.createTime = new Date().toLocaleString().split(' ')[0]
+    // opts.createTime = new Date().toLocaleString().split(' ')[0]
     this.entity = new ArticleModel(opts)
     return this.entity.save(opts)
   }
@@ -24,7 +24,9 @@ class Article {
   }
   remove (id, fn) {
     return this.model.findById(id).then((doc) => {
-      if (!doc) return fn(null, false)
+      if (!doc) {
+        return fn(null, false)
+      }
       return doc.remove()
     })
   }
