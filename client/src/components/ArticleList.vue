@@ -1,11 +1,8 @@
 <template>
   <div class="posts-container ly-col-14">
-    <div class="posts-wrap"
-      :class="{'adaptor': showLoading === true}">
+    <div class="posts-wrap">
       <h1 class="posts-head-title">文章</h1>
-      <div class="posts-article"
-        transition="fadeIn"
-        v-show="showLoading === false">
+      <div class="posts-article">
         <ul class="posts-article-list">
           <li class="posts-article-item" v-for="article of articleList">
             <h3 class="article-head-title">
@@ -37,12 +34,10 @@
         </ul>
       </div>
     </div>
-    <PageNav :start="start"></PageNav>
   </div>
 </template>
 
 <script>
-import PageNav from './PageNav.vue'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
@@ -98,9 +93,6 @@ export default {
   },
   created () {
     this.evtGetArticleList()
-  },
-  components: {
-    'PageNav': PageNav
   }
 }
 </script>

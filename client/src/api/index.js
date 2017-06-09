@@ -15,7 +15,8 @@ Vue.http.interceptors.push((request, next) => {
   })
 })
 
-const API_ROOT = 'http://127.0.0.1:3000'
+const API_ROOT = 'http://23.88.229.24:3000'
+// const API_ROOT = 'http://127.0.0.1:3000'
 const apiResource = Vue.resource(API_ROOT + '{/id}{/controller}')
 const articleResource = Vue.resource(API_ROOT + '/articles{/id}{/controller}')
 const usersResource = Vue.resource(API_ROOT + '/users{/id}')

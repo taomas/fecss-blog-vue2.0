@@ -98,7 +98,7 @@ export default {
       this.xGetArticleDetail({
         id: this.articleId
       }).then((res) => {
-        this.detail = res.data
+        this.detail = res.data.detail
       }).catch((message) => {
         this.$message.error(message)
       })

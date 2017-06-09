@@ -16,10 +16,11 @@
         <input class="login-form-password" type="password" value="" placeholder="密码"
           v-model="password">
       </div>
-      <button class="login-btn-login" type="button"
+      <button class="btn-login" type="button"
         @click="evtUserLogin">用户登陆</button>
-        <!--
-       <button class="login-btn-register" type="button"
+      <p class="login-desc">root, 密码：123456</p>
+      <!---->
+      <!-- <button class="btn-register" type="button"
         @click="evtUserRegister">用户注册</button>-->
     </section>
   </div>
@@ -165,7 +166,7 @@ export default {
     border-radius: 3px;
     outline: none;
   }
-  .login-btn-login, .login-btn-register {
+  .btn-login, .btn-register {
     display: block;
     width: 100%;
     height: 40px;
@@ -175,6 +176,9 @@ export default {
     border-radius: 5px;
     outline: none;
     cursor: pointer;
+  }
+  .login-desc {
+
   }
 }
 </style>

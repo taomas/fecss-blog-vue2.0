@@ -1,6 +1,6 @@
 import cookies from 'js-cookie'
 import api from '../api'
-import * as types from './mutation-types'
+// import * as types from './mutation-types'
 
 const SUCCESS_CODE = 1000000
 
@@ -121,10 +121,10 @@ export const userLogin = (ctx, opts) => {
 
 export const userRegister = (ctx, opts) => {
   return api.userRegister(opts).then(function(res) {
-    if (res.body.success) {
-      ctx.commit(types.SHOW_SUCCESS_MESSAGE, res.body.message)
+    if (res.body.statuscode === SUCCESS_CODE) {
+      return Promise.resolve(res.body)
     } else {
-      ctx.commit(types.SHOW_ERROR_MESSAGE, res.body.message)
+      return Promise.reject(res.body)
     }
   })
 }

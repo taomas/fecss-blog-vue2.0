@@ -44,14 +44,6 @@ export default {
       this.$parent.evtTogglePre()
     }
   }
-  // vuex: {
-  //   getters: {
-  //     maxIndex: state => state.maxIndex
-  //   },
-  //   actions: {
-  //     getArticleList
-  //   }
-  // }
 }
 </script>
 
