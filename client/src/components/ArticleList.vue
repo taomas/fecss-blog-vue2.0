@@ -58,7 +58,7 @@ export default {
       xGetArticleList: 'getArticleList'
     }),
     substringRender(render) {
-      return render.substr(0, 150)
+      return render.split('</p>')[0].substring(0, 150) + '...</p>'
     },
     evtToggleNext() {
       this.start++

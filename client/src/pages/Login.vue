@@ -18,7 +18,7 @@
       </div>
       <button class="btn-login" type="button"
         @click="evtUserLogin">用户登陆</button>
-      <p class="login-desc">root, 密码：123456</p>
+      <p class="login-desc">账号：root --- 密码：123456</p>
       <!---->
       <!-- <button class="btn-register" type="button"
         @click="evtUserRegister">用户注册</button>-->
